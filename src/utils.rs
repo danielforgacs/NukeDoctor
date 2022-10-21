@@ -1,12 +1,20 @@
 use crate::modules::*;
 
 pub fn clean_up_scene(scene: String) -> String {
+    if scene.len() == 0 {
+        return "".to_string();
+    }
     let source: Vec<char> = scene.chars().collect();
     let nodes = parse(source);
+    // dump the nodes to json here.
     nodes_to_scene(nodes)
 }
 
 fn nodes_to_scene(nodes: Vec<Node>) -> String {
+    let mut scene = String::new();
+    for node in nodes {
+        scene += &node.to_text();
+    }
     String::new()
 }
 
