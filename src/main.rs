@@ -1,39 +1,22 @@
+mod parser;
+mod structs;
+mod errors;
+mod utils;
 mod modules {
     pub use std::path::Path;
     pub use std::fs::File;
     pub use std::io::prelude::*;
     pub use serde::Deserialize;
     pub use serde_json::from_str;
+    pub use super::structs::Node;
+    pub use super::errors::IOError;
+    pub use super::utils::*;
 }
 
 use modules::*;
 
-#[derive(Debug)]
-struct IOError {
-    msg: String,
-}
-
-impl IOError {
-    fn new(msg: String) -> Self {
-        Self { msg }
-    }
-}
-
 fn main() {}
 
-fn clean_up_scene(scene: String) -> String {
-    let source: Vec<char> = scene.chars().collect();
-    String::from_iter(source)
-}
-
-fn read_file_to_string(path: &str) -> Result<String, IOError> {
-    let mut buf = String::new();
-    let mut file_handle = File::open(path)
-        .map_err(|e| IOError::new(format!("Error opening file for reading: {}", path)))?;
-    let _read_bytes = file_handle.read_to_string(&mut buf)
-        .map_err(|e| IOError::new(format!("Error reading file: {}", path)))?;
-    Ok(buf)
-}
 
 #[cfg(test)]
 mod test {
