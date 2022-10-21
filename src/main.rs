@@ -23,9 +23,7 @@ mod test {
 
     #[test]
     fn test_read_file_to_string() {
-        let expected = r#"Dot {
-  name alskdjfhklasdf
-}"#;
+        let expected = read_file_to_string("test_data/scene01_expected.nk");
         let data = read_file_to_string("test_data/scene01.nk");
         assert_eq!(data, expected);
     }
