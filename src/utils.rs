@@ -2,7 +2,12 @@ use crate::modules::*;
 
 pub fn clean_up_scene(scene: String) -> String {
     let source: Vec<char> = scene.chars().collect();
-    String::from_iter(source)
+    let nodes = parse(source);
+    nodes_to_scene(nodes)
+}
+
+fn nodes_to_scene(nodes: Vec<Node>) -> String {
+    String::new()
 }
 
 pub fn read_file_to_string(path: &str) -> Result<String, IOError> {

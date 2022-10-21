@@ -10,6 +10,7 @@ mod modules {
     pub use serde_json::from_str;
     pub use super::structs::Node;
     pub use super::errors::IOError;
+    pub use super::parser::parse;
     pub use super::utils::*;
 }
 
