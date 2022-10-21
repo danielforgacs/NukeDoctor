@@ -11,11 +11,11 @@ pub fn clean_up_scene(scene: String) -> String {
 }
 
 fn nodes_to_scene(nodes: Vec<Node>) -> String {
-    let mut scene = String::new();
+    let mut scene = String::with_capacity(10000);
     for node in nodes {
         scene += &node.to_text();
     }
-    String::new()
+    scene
 }
 
 pub fn read_file_to_string(path: &str) -> Result<String, IOError> {
