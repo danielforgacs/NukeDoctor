@@ -21,6 +21,11 @@ impl IOError {
 
 fn main() {}
 
+fn clean_up_scene(scene: String) -> String {
+    let source: Vec<char> = scene.chars().collect();
+    String::from_iter(source)
+}
+
 fn read_file_to_string(path: &str) -> Result<String, IOError> {
     let mut buf = String::new();
     let mut file_handle = File::open(path)
@@ -43,7 +48,8 @@ mod test {
         }
         let cases: Vec<TestCase> = from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
         for case in cases {
-            let expected = read_file_to_string(&case.source).unwrap();
+            let source = read_file_to_string(&case.source).unwrap();
+            let expected = clean_up_scene(source);
             let data = read_file_to_string(&case.expected).unwrap();
             assert_eq!(data, expected);
         }
