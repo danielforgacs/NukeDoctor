@@ -41,6 +41,7 @@ fn nodes_to_scene(nodes: &Vec<Node>) -> String {
         }
         scene += &node.to_text();
     }
+    scene.push('\n');
     scene
 }
 
