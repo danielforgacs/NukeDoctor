@@ -10,6 +10,7 @@ pub enum NodeType {
 pub struct Node {
     nodetype: NodeType,
     body: String,
+    body_index: usize,
 }
 
 impl From<String> for NodeType {
@@ -32,10 +33,11 @@ impl From<NodeType> for String {
 }
 
 impl Node {
-    pub fn new(nodetype: NodeType, body: String) -> Self {
+    pub fn new(nodetype: NodeType, body: String, body_index: usize) -> Self {
         Self {
             nodetype,
             body,
+            body_index,
         }
     }
 
