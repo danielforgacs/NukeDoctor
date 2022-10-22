@@ -13,7 +13,7 @@ mod modules {
     pub use super::utils::*;
 }
 
-use modules::*;
+// use modules::*;
 
 fn main() {
     env_logger::init();
@@ -22,7 +22,8 @@ fn main() {
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    // use super::*;
+    use super::modules::*;
     pub use serde_json::from_str;
 
     fn init_log() {
