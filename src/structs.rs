@@ -11,7 +11,7 @@ pub enum NodeType {
     NotNode,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Node {
     nodetype: NodeType,
     body: String,
