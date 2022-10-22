@@ -12,6 +12,13 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
     }
     let source: Vec<char> = scene.chars().collect();
     let nodes = parse(source);
+    // DO FILTERING HERE
+    // BY
+    // - TYPE
+    // - NAME
+    // - BODY SIZE
+    // MARK NODES AS ACTIVE / NOT ACTIVE
+    // STILL DUMP NOT ACTOVE
     write_string_to_file(
         &path.replace(".nk", ".json"),
         serde_json::to_string_pretty(&NodeBump {
