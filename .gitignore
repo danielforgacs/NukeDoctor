@@ -1,4 +1,6 @@
 example_scripts/*.*.json
 test_data/*.*.json
+example_scripts/*.*.doctored
+test_data/*.*.doctored
 
 /target
