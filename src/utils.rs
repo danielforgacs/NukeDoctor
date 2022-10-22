@@ -27,7 +27,12 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
             nodes: nodes.clone(),
         }).unwrap()
     ).expect("Can't write node dump json file.");
-    nodes_to_scene(&nodes)
+    let scene = nodes_to_scene(&nodes);
+    write_string_to_file(
+        &format!("{}.doctored", path),
+        scene.clone()
+    ).expect("Can't save the doctored scene.");
+    scene
 }
 
 fn nodes_to_scene(nodes: &Vec<Node>) -> String {

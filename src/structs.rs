@@ -3,6 +3,7 @@ use crate::modules::*;
 #[derive(Debug, Clone, Serialize)]
 pub struct Node {
     nodetype: String,
+    name: String,
     body: String,
     body_index: usize,
     body_size: usize,
@@ -10,10 +11,11 @@ pub struct Node {
 }
 
 impl Node {
-    pub fn new(nodetype: String, body: String, body_index: usize, group_name: Option<String>) -> Self {
+    pub fn new(nodetype: String, name: String, body: String, body_index: usize, group_name: Option<String>) -> Self {
         let body_size = body.len();
         Self {
             nodetype,
+            name,
             body,
             body_index,
             body_size,
