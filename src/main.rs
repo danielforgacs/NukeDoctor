@@ -7,7 +7,7 @@ mod modules {
     pub use std::fs::File;
     pub use std::io::prelude::*;
     pub use serde::{Serialize, Deserialize};
-    pub use super::structs::{Node, NodeType};
+    pub use super::structs::Node;
     pub use super::errors::IOError;
     pub use super::parser::parse;
     pub use super::utils::*;
@@ -33,6 +33,7 @@ mod test {
     fn test_read_file_to_string() {
         #[derive(Deserialize)]
         struct TestCase {
+            enabled: u8,
             source: String,
             expected: String,
         }
@@ -40,6 +41,9 @@ mod test {
         init_log();
         let cases: Vec<TestCase> = from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
         for case in cases {
+            if case.enabled == 0 {
+                continue;
+            }
             let source = read_file_to_string(&case.source).unwrap();
             let scene = clean_up_scene(source, case.source);
             let expected = read_file_to_string(&case.expected).unwrap();
