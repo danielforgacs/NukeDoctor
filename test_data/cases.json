@@ -13,5 +13,25 @@
     "enabled": 1,
     "source": "example_scripts/DeepMerge_Advanced.gizmo",
     "expected": "test_data/DeepMerge_Advanced_expected.gizmo"
+  },
+  {
+    "enabled": 1,
+    "source": "example_scripts/Creating_Motion_Blur.nk",
+    "expected": "test_data/Creating_Motion_Blur_expected.nk"
+  },
+  {
+    "enabled": 1,
+    "source": "example_scripts/Cloudtastic.nk",
+    "expected": "test_data/Cloudtastic_expected.nk"
+  },
+  {
+    "enabled": 0,
+    "source": "example_scripts/bm_MatteCheck.gizmo",
+    "expected": "test_data/bm_MatteCheck_expected.gizmo"
+  },
+  {
+    "enabled": 0,
+    "source": "example_scripts/bm_EdgeMatte.gizmo",
+    "expected": "test_data/bm_EdgeMatte_expected.gizmo"
   }
 ]
