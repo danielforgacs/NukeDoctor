@@ -7,7 +7,6 @@ mod modules {
     pub use std::fs::File;
     pub use std::io::prelude::*;
     pub use serde::Deserialize;
-    pub use serde_json::from_str;
     pub use super::structs::{Node, NodeType};
     pub use super::errors::IOError;
     pub use super::parser::parse;
@@ -22,6 +21,7 @@ fn main() {}
 #[cfg(test)]
 mod test {
     use super::*;
+    pub use serde_json::from_str;
 
     #[test]
     fn test_read_file_to_string() {
