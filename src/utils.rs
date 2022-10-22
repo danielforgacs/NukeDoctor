@@ -21,7 +21,7 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
     // MARK NODES AS ACTIVE / NOT ACTIVE
     // STILL DUMP NOT ACTOVE
     write_string_to_file(
-        &path.replace(".nk", ".json"),
+        &format!("{}.json", path),
         serde_json::to_string_pretty(&NodeBump {
             node_count: nodes.len(),
             nodes: nodes.clone(),
