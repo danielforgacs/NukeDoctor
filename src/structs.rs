@@ -38,11 +38,9 @@ impl Node {
     }
 
     pub fn to_text(&self) -> String {
-        let mut node_text = String::with_capacity(10000);
-        node_text += String::from(self.nodetype.clone()).as_ref();
-        node_text += " {";
-        node_text += &self.body;
-        node_text.push('}');
-        node_text
+        format!(r#"{} {{{}}}"#,
+            String::from(self.nodetype.clone()),
+            self.body,
+        )
     }
 }
