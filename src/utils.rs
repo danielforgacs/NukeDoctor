@@ -11,9 +11,17 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
         return "".to_string();
     }
     let source: Vec<char> = scene.chars().collect();
+    log::info!("staring parsing.");
     let nodes = parse(source);
+    // DO FILTERING HERE
+    // BY
+    // - TYPE
+    // - NAME
+    // - BODY SIZE
+    // MARK NODES AS ACTIVE / NOT ACTIVE
+    // STILL DUMP NOT ACTOVE
     write_string_to_file(
-        &path.replace(".nk", ".json"),
+        &format!("{}.json", path),
         serde_json::to_string_pretty(&NodeBump {
             node_count: nodes.len(),
             nodes: nodes.clone(),
@@ -39,9 +47,9 @@ fn nodes_to_scene(nodes: &Vec<Node>) -> String {
 pub fn read_file_to_string(path: &str) -> Result<String, IOError> {
     let mut buf = String::new();
     let mut file_handle = File::open(path)
-        .map_err(|e| IOError::new(format!("Error opening file for reading: {}", path)))?;
+        .map_err(|_err| IOError::new(format!("Error opening file for reading: {}", path)))?;
     let _read_bytes = file_handle.read_to_string(&mut buf)
-        .map_err(|e| IOError::new(format!("Error reading file: {}", path)))?;
+        .map_err(|_err| IOError::new(format!("Error reading file: {}", path)))?;
     Ok(buf)
 }
 
