@@ -6,16 +6,18 @@ pub struct Node {
     body: String,
     body_index: usize,
     body_size: usize,
+    group_name: Option<String>
 }
 
 impl Node {
-    pub fn new(nodetype: String, body: String, body_index: usize) -> Self {
+    pub fn new(nodetype: String, body: String, body_index: usize, group_name: Option<String>) -> Self {
         let body_size = body.len();
         Self {
             nodetype,
             body,
             body_index,
             body_size,
+            group_name,
         }
     }
 
