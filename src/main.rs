@@ -6,7 +6,7 @@ mod modules {
     pub use std::path::Path;
     pub use std::fs::File;
     pub use std::io::prelude::*;
-    pub use serde::Deserialize;
+    pub use serde::{Serialize, Deserialize};
     pub use super::structs::{Node, NodeType};
     pub use super::errors::IOError;
     pub use super::parser::parse;

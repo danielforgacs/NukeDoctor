@@ -1,10 +1,12 @@
-#[derive(Debug, Clone)]
+use crate::modules::*;
+
+#[derive(Debug, Clone, Serialize)]
 pub enum NodeType {
     Dot,
     NotNode,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Node {
     nodetype: NodeType,
     body: String,

@@ -7,6 +7,7 @@ pub fn clean_up_scene(scene: String) -> String {
     let source: Vec<char> = scene.chars().collect();
     let nodes = parse(source);
     // dump the nodes to json here.
+    write_string_to_file("node_dump.json", serde_json::to_string_pretty(&nodes).unwrap());
     nodes_to_scene(nodes)
 }
 
@@ -31,4 +32,9 @@ pub fn read_file_to_string(path: &str) -> Result<String, IOError> {
     let _read_bytes = file_handle.read_to_string(&mut buf)
         .map_err(|e| IOError::new(format!("Error reading file: {}", path)))?;
     Ok(buf)
+}
+
+fn write_string_to_file(path: &str, data: String) -> Result<(), IOError> {
+    std::fs::write(path, data).map_err(|_err| IOError::new("Can't dump done json file."))?;
+    Ok(())
 }

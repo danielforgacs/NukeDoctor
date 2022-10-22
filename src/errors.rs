@@ -4,7 +4,7 @@ pub struct IOError {
 }
 
 impl IOError {
-    pub fn new(msg: String) -> Self {
-        Self { msg }
+    pub fn new<T: ToString>(msg: T) -> Self {
+        Self { msg: msg.to_string() }
     }
 }
