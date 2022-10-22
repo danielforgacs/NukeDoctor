@@ -1,5 +1,11 @@
 use crate::modules::*;
 
+#[derive(Debug, Clone, Serialize)]
+struct NodeBump {
+    node_count: usize,
+    nodes: Vec<Node>,
+}
+
 pub fn clean_up_scene(scene: String, path: String) -> String {
     if scene.len() == 0 {
         return "".to_string();
@@ -8,7 +14,10 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
     let nodes = parse(source);
     write_string_to_file(
         &path.replace(".nk", ".json"),
-        serde_json::to_string_pretty(&nodes).unwrap()
+        serde_json::to_string_pretty(&NodeBump {
+            node_count: nodes.len(),
+            nodes: nodes.clone(),
+        }).unwrap()
     ).expect("Can't write node dump json file.");
     nodes_to_scene(&nodes)
 }
