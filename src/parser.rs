@@ -7,11 +7,19 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
         let char = source[index];
         if char.is_alphabetic() {
             let word = extract_word(&source, &mut index);
-            if word == "Dot" {
-                nodes.push(Node::new(word));
+            if source[index..=index+1] == [' ', '{'] {
+                skip_whitespace(&source, &mut index);
+                match NodeType::from(word.clone()) {
+                    NodeType::NotNode => {},
+                    _ => {
+                        let body = parse_brackets(&source, &mut index);
+                        nodes.push(Node::new(word.into(), body));
+                    },
+                }
             }
+        } else {
+            index += 1;
         }
-        index += 1;
         if index == source.len() - 1 {
             break;
         }
@@ -33,4 +41,41 @@ fn extract_word(source: &Vec<char>, index: &mut usize) -> String {
         }
     }
     word
+}
+
+fn skip_whitespace(source: &Vec<char>, index: &mut usize) {
+    loop {
+        let char = source[*index];
+        if ![' ', '\n'].contains(&char) {
+            break;
+        }
+        *index += 1;
+        if *index == source.len() - 1 {
+            break;
+        }
+    }
+}
+
+fn parse_brackets(source: &Vec<char>, index: &mut usize) -> String {
+    let mut body = String::with_capacity(10000);
+    let mut nesting = 1;
+    *index += 1;
+    loop {
+        let char = source[*index];
+        if char == '{' {
+            nesting += 1;
+        }
+        if char == '}' {
+            nesting -= 1;
+            if nesting == 0 {
+                break;
+            }
+        }
+        body.push(char);
+        *index += 1;
+        if *index == source.len() - 1 {
+            break;
+        }
+    }
+    body
 }
