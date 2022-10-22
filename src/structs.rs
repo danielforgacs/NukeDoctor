@@ -16,6 +16,7 @@ pub struct Node {
     nodetype: NodeType,
     body: String,
     body_index: usize,
+    body_size: usize,
 }
 
 impl From<String> for NodeType {
@@ -49,10 +50,12 @@ impl From<NodeType> for String {
 
 impl Node {
     pub fn new(nodetype: NodeType, body: String, body_index: usize) -> Self {
+        let body_size = body.len();
         Self {
             nodetype,
             body,
             body_index,
+            body_size,
         }
     }
 
