@@ -76,7 +76,7 @@ fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String)
             let word = extract_word(&source, &mut index);
             body += &word.as_str();
             *index -= 1;
-            if word == "name" {
+            if word == "name" && source[*index+1].is_whitespace() {
                 body.push(' ');
                 *index += 1;
                 *index += 1;
