@@ -6,5 +6,9 @@
   {
     "source": "example_scripts/Despilling_Greenscreen_and_Bluescree_Footage.nk",
     "expected": "test_data/Despilling_Greenscreen_and_Bluescree_Footage_expected.nk"
+  },
+  {
+    "source": "example_scripts/DeepMerge_Advanced.gizmo",
+    "expected": "test_data/DeepMerge_Advanced_expected.gizmo"
   }
 ]
