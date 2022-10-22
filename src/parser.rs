@@ -7,6 +7,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
         let char = source[index];
         if char.is_alphabetic() {
             let word = extract_word(&source, &mut index);
+            log::debug!("found word: {}, index: {}", &word, &index);
             if source[index..=index+1] == [' ', '{'] {
                 skip_whitespace(&source, &mut index);
                 match NodeType::from(word.clone()) {
@@ -37,7 +38,7 @@ fn extract_word(source: &Vec<char>, index: &mut usize) -> String {
             break;
         }
         *index += 1;
-        if !source[*index].is_alphanumeric() {
+        if !source[*index].is_alphanumeric() && source[*index] != '_' {
             break;
         }
     }
