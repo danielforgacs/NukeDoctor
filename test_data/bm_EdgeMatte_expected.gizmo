@@ -1,6 +1,3 @@
-set cut_paste_input [stack 0]
-version 13.1 v2
-push $cut_paste_input
 Group {
  name bm_EdgeMatte
  help "Created to \"edgeDetect\" mattes. ...an, controllable outline (like Edge Detect) from any... and the like."
@@ -20,13 +17,13 @@ Group {
  edgeCentre {1024 778}
  addUserKnob {26 version_info l "" +STARTLINE T "<font color='#777'><b>bm_EdgeMatte v2.0</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'><b>Last updated:</b> 23rd January, 2018.</font>"}
 }
- Input {
+Input {
   inputs 0
   name Input1
   xpos 542
   ypos 483
  }
- Dot {
+Dot {
   name Dot1
   label "  "
   note_font "Arial Black"
@@ -34,8 +31,7 @@ Group {
   xpos 576
   ypos 523
  }
-set N8370f400 [stack 0]
- FilterErode {
+FilterErode {
   channels alpha
   size {{innerEdge} {innerEdge}}
   filter {{filterType}}
@@ -43,21 +39,21 @@ set N8370f400 [stack 0]
   xpos 487
   ypos 584
  }
- Blur {
+Blur {
   channels alpha
   size {{innerBlur} {innerBlur}}
   name Blur1
   xpos 487
   ypos 622
  }
- Merge2 {
+Merge2 {
   inputs 2
   operation stencil
   name Merge1
   xpos 538
   ypos 686
  }
- Transform {
+Transform {
   translate {{edgeTranslate i} {edgeTranslate i}}
   rotate {{edgeRotate i}}
   scale {{edgeScale i} {edgeScale i}}
@@ -67,7 +63,7 @@ set N8370f400 [stack 0]
   xpos 538
   ypos 827
  }
- Output {
+Output {
   name Output1
   xpos 538
   ypos 898
