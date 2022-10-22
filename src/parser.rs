@@ -10,17 +10,10 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
             log::debug!("found word: {}, index: {}", &word, &index);
             if source[index..=index+1] == [' ', '{'] {
                 skip_whitespace(&source, &mut index);
-                match NodeType::from(word.clone()) {
-                    NodeType::UnKnown => {
-                        log::debug!("unknown node type: {}", &word);
-                    },
-                    _ => {
-                        let body_index = index.clone() + 1;
-                        let body = parse_brackets(&source, &mut index);
-                        log::debug!("extracted body. index: {}", &index);
-                        nodes.push(Node::new(word.into(), body, body_index));
-                    },
-                }
+                let body_index = index.clone() + 1;
+                let body = parse_brackets(&source, &mut index);
+                log::debug!("extracted body. index: {}", &index);
+                nodes.push(Node::new(word, body, body_index));
             }
         }
         index += 1;
