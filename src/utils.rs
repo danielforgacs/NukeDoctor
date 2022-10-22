@@ -11,6 +11,7 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
         return "".to_string();
     }
     let source: Vec<char> = scene.chars().collect();
+    log::info!("staring parsing.");
     let nodes = parse(source);
     // DO FILTERING HERE
     // BY
