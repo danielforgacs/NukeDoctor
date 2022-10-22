@@ -8,7 +8,7 @@ pub enum NodeType {
     Viewer,
     StickyNote,
     Dot,
-    NotNode,
+    UnKnown,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -28,7 +28,7 @@ impl From<String> for NodeType {
             "Viewer" => Self::Viewer,
             "StickyNote" => Self::StickyNote,
             "Dot" => Self::Dot,
-            _ => Self::NotNode,
+            _ => Self::UnKnown,
         }
 
     }
@@ -43,7 +43,7 @@ impl From<NodeType> for String {
             NodeType::Viewer => "Viewer".to_string(),
             NodeType::StickyNote => "StickyNote".to_string(),
             NodeType::Dot => "Dot".to_string(),
-            NodeType::NotNode => "NotNode".to_string(),
+            NodeType::UnKnown => "NotNode".to_string(),
         }
     }
 }

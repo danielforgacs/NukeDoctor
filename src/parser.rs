@@ -10,7 +10,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
             if source[index..=index+1] == [' ', '{'] {
                 skip_whitespace(&source, &mut index);
                 match NodeType::from(word.clone()) {
-                    NodeType::NotNode => {},
+                    NodeType::UnKnown => {},
                     _ => {
                         let body_index = index.clone() + 1;
                         let body = parse_brackets(&source, &mut index);
