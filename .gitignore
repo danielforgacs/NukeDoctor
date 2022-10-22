@@ -1,3 +1,5 @@
-node_dump.json
+example_scripts/*.json
+test_data/*.json
+
 
 /target

@@ -1,17 +1,28 @@
 use crate::modules::*;
 
-pub fn clean_up_scene(scene: String) -> String {
+#[derive(Debug, Clone, Serialize)]
+struct NodeBump {
+    node_count: usize,
+    nodes: Vec<Node>,
+}
+
+pub fn clean_up_scene(scene: String, path: String) -> String {
     if scene.len() == 0 {
         return "".to_string();
     }
     let source: Vec<char> = scene.chars().collect();
     let nodes = parse(source);
-    // dump the nodes to json here.
-    write_string_to_file("node_dump.json", serde_json::to_string_pretty(&nodes).unwrap());
-    nodes_to_scene(nodes)
+    write_string_to_file(
+        &path.replace(".nk", ".json"),
+        serde_json::to_string_pretty(&NodeBump {
+            node_count: nodes.len(),
+            nodes: nodes.clone(),
+        }).unwrap()
+    ).expect("Can't write node dump json file.");
+    nodes_to_scene(&nodes)
 }
 
-fn nodes_to_scene(nodes: Vec<Node>) -> String {
+fn nodes_to_scene(nodes: &Vec<Node>) -> String {
     let mut scene = String::with_capacity(10000);
     let mut is_first = true;
     for node in nodes {
