@@ -77,9 +77,10 @@ fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String)
             body += &word.as_str();
             *index -= 1;
             if word == "name" {
+                body.push(' ');
+                *index += 1;
                 *index += 1;
                 name = extract_word(&source, &mut index);
-                log::info!("getting name. index: {}", index);
                 body += &name.as_str();
                 *index -= 1;
             }
