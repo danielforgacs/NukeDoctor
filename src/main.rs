@@ -33,9 +33,9 @@ mod test {
         let cases: Vec<TestCase> = from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
         for case in cases {
             let source = read_file_to_string(&case.source).unwrap();
-            let expected = clean_up_scene(source);
-            let data = read_file_to_string(&case.expected).unwrap();
-            assert_eq!(data, expected);
+            let scene = clean_up_scene(source, case.source);
+            let expected = read_file_to_string(&case.expected).unwrap();
+            assert_eq!(scene, expected);
         }
     }
 }
