@@ -12,7 +12,13 @@ pub fn clean_up_scene(scene: String) -> String {
 
 fn nodes_to_scene(nodes: Vec<Node>) -> String {
     let mut scene = String::with_capacity(10000);
+    let mut is_first = true;
     for node in nodes {
+        if !is_first {
+            scene.push('\n');
+        } else {
+            is_first = false;
+        }
         scene += &node.to_text();
     }
     scene

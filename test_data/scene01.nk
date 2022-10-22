@@ -1,3 +1,6 @@
 Dot {
   name Dot1
 }
+Dot {
+  name Dot2
+}
