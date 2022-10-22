@@ -13,7 +13,12 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                 let body_index = index.clone() + 1;
                 let body = parse_brackets(&source, &mut index);
                 log::debug!("extracted body. index: {}", &index);
-                nodes.push(Node::new(word, body, body_index));
+                nodes.push(Node::new(
+                    word,
+                    body,
+                    body_index,
+                    Option::None,
+                ));
             }
         }
         index += 1;
