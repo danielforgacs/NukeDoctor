@@ -12,7 +12,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                 match NodeType::from(word.clone()) {
                     NodeType::NotNode => {},
                     _ => {
-                        let body_index = index.clone();
+                        let body_index = index.clone() + 1;
                         let body = parse_brackets(&source, &mut index);
                         nodes.push(Node::new(word.into(), body, body_index));
                     },
