@@ -1,3 +1,4 @@
+set cut_paste_input [stack 0]
 BackdropNode {
  inputs 0
  name BackdropNode2
@@ -78,6 +79,7 @@ Dot {
  xpos 1307
  ypos -505
 }
+set Nde790f0 [stack 0]
 Grade {
  multiply {{CLOUDTASTIC_CONTROLS.cloud_gain} ... {CLOUDTASTIC_CONTROLS.cloud_gamma}}
  black_clamp false
@@ -110,6 +112,7 @@ Dot {
  xpos 1477
  ypos -505
 }
+set Ne053c20 [stack 0]
 Grade {
  multiply {{CLOUDTASTIC_CONTROLS.cloud_gain} ... {CLOUDTASTIC_CONTROLS.cloud_gamma}}
  black_clamp false

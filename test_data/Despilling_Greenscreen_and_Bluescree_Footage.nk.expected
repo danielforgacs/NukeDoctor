@@ -11,6 +11,7 @@ ColorWheel {
  xpos -120
  ypos -106
 }
+set N1ab1aa00 [stack 0]
 Expression {
  expr2 b&gt;(r+g)/2?(r+g)/2:b
  name ExpressionBlueDespill

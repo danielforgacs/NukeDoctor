@@ -1,3 +1,4 @@
+set cut_paste_input [stack 0]
 push $cut_paste_input
 Group {
  name DeepMerge_Advanced
@@ -31,12 +32,14 @@ DeepExpression {
   xpos 393
   ypos -499
  }
+set N4282660 [stack 0]
 Input {
   inputs 0
   name B
   xpos 551
   ypos -654
  }
+set N4ce1390 [stack 0]
 DeepHoldout2 {
   inputs 2
   name DeepHoldout2
