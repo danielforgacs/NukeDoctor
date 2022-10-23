@@ -136,20 +136,21 @@ fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String)
 }
 
 fn crate_node(word: String, group: &mut Option<String>, source: &Vec<char>, index: &mut usize) -> Node {
+    skip_whitespace(&source, index);
+    let body_index = index.clone() + 1;
+    let (name, body) = parse_brackets(&source, index);
+    log::debug!("extracted body. index: {}", &index);
+    let node = Node::new(
+        word.clone(),
+        name,
+        body,
+        body_index,
+        group.clone(),
+    );
     if word == "Group" {
         *group = Option::Some(word.clone());
     } else if word == "end_group" {
         *group = Option::None;
     }
-    skip_whitespace(&source, index);
-    let body_index = index.clone() + 1;
-    let (name, body) = parse_brackets(&source, index);
-    log::debug!("extracted body. index: {}", &index);
-    Node::new(
-        word,
-        name,
-        body,
-        body_index,
-        group.clone(),
-    )
+    node
 }
