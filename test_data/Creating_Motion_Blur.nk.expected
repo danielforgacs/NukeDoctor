@@ -21,6 +21,7 @@ Transform {
  xpos -66
  ypos -193
 }
+set N3b44400 [stack 0]
 Tracker3 {
  track1 {{curve i x1 355 ... 848.9234619 1064.999634}}
  offset1 {0 0}

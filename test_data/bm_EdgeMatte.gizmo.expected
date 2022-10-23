@@ -1,3 +1,4 @@
+set cut_paste_input [stack 0]
 push $cut_paste_input
 Group {
  name bm_EdgeMatte
@@ -32,6 +33,7 @@ Dot {
   xpos 576
   ypos 523
  }
+set N8370f400 [stack 0]
 FilterErode {
   channels alpha
   size {{innerEdge} {innerEdge}}

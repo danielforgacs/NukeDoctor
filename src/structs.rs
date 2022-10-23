@@ -26,7 +26,8 @@ impl Node {
     pub fn to_text(&self) -> String {
         if self.body.len() == 0 {
             return self.nodetype.clone();
-        } else if self.nodetype == "push" {
+        // } else if self.nodetype == "push" {
+        } else if ["push", "set"].contains(&self.nodetype.as_str()) {
             return format!(r#"{} {}"#,
                 String::from(self.nodetype.clone()),
                 self.body,

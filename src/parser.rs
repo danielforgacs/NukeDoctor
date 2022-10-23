@@ -37,6 +37,24 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                 }
                 nodes.push(Node::new(word, "".to_string(), push_arg, body_index, group.clone()))
             } else if word == "set" {
+                index += 1;
+                let body_index = index.clone();
+                let arg1 = extract_word(&source, &mut index);
+                index += 1;
+                let mut arg2 = String::with_capacity(100);
+                loop {
+                    let char = source[index];
+                    if char == '\n' {
+                        break;
+                    }
+                    arg2.push(char);
+                    index += 1;
+                    if index == source.len() - 1 {
+                        break;
+                    }
+                }
+                let body = format!("{} {}", arg1, arg2);
+                nodes.push(Node::new(word, "".to_string(), body, body_index, group.clone()))
             }
         }
         index += 1;
