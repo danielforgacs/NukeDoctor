@@ -1,6 +1,13 @@
 Dot {
   name Dot1
 }
+Group {
+  name groupname
+}
 Dot {
   name Dot2
+}
+end_group
+Dot {
+  name Dot3
 }
