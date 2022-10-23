@@ -20,6 +20,8 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                     index,
                     group.clone(),
                 ));
+            } else if word == "push" {
+            } else if word == "set" {
             }
         }
         index += 1;
