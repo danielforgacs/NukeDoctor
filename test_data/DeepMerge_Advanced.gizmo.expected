@@ -15,14 +15,14 @@ Group {
  addUserKnob {26 version_info l "" +STARTLINE T "\nCreated by Ben McEwan\nwww.benmcewan.com\n\nVersion 0.2.0\nLast Updated: September 10th, 2019\n"}
  Scriplet_Info central
 }
-Input {
+ Input {
   inputs 0
   name A
   xpos 242
   ypos -499
   number 1
  }
-DeepExpression {
+ DeepExpression {
   temp_name0 blur
   temp_expr0 "\[value blurAmt]/2"
   chans1 deep
@@ -33,21 +33,21 @@ DeepExpression {
   ypos -499
  }
 set N4282660 [stack 0]
-Input {
+ Input {
   inputs 0
   name B
   xpos 551
   ypos -654
  }
 set N4ce1390 [stack 0]
-DeepHoldout2 {
+ DeepHoldout2 {
   inputs 2
   name DeepHoldout2
   xpos 754
   ypos -438
  }
 push $N4ce1390
-Dot {
+ Dot {
   name Dot3
   label "  "
   note_font "Arial Black"
@@ -55,7 +55,7 @@ Dot {
   xpos 895
   ypos -532
  }
-DeepRecolor {
+ DeepRecolor {
   inputs 2
   channels all
   targetInputAlpha true
@@ -65,28 +65,28 @@ DeepRecolor {
  }
 push $N4282660
 push $N5a8fac0
-DeepMerge {
+ DeepMerge {
   inputs 2
   drop_hidden true
   name DeepMerge2
   xpos 551
   ypos -499
  }
-Switch {
+ Switch {
   inputs 2
   which {{operation}}
   name Switch1
   xpos 551
   ypos -356
  }
-DeepToImage {
+ DeepToImage {
   name DeepToImage1
   selected true
   xpos 551
   ypos -279
   disable {{!output_data}}
  }
-Output {
+ Output {
   name Output1
   xpos 551
   ypos -199

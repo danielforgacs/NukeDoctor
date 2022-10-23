@@ -4,7 +4,7 @@ Dot {
 Group {
   name groupname
 }
-Dot {
+ Dot {
   name Dot2
 }
 end_group
