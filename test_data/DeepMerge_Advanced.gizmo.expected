@@ -1,3 +1,4 @@
+push $cut_paste_input
 Group {
  name DeepMerge_Advanced
  help "- Merges all channels... which exists in Nuke 11."
@@ -42,6 +43,7 @@ DeepHoldout2 {
   xpos 754
   ypos -438
  }
+push $N4ce1390
 Dot {
   name Dot3
   label "  "
@@ -58,6 +60,8 @@ DeepRecolor {
   xpos 754
   ypos -361
  }
+push $N4282660
+push $N5a8fac0
 DeepMerge {
   inputs 2
   drop_hidden true

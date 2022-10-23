@@ -21,6 +21,21 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                     group.clone(),
                 ));
             } else if word == "push" {
+                index += 1;
+                let body_index = index.clone();
+                let mut push_arg = String::with_capacity(100);
+                loop {
+                    let char = source[index];
+                    if char.is_whitespace() {
+                        break;
+                    }
+                    push_arg.push(char);
+                    index += 1;
+                    if index == source.len() - 1 {
+                        break;
+                    }
+                }
+                nodes.push(Node::new(word, "".to_string(), push_arg, body_index, group.clone()))
             } else if word == "set" {
             }
         }

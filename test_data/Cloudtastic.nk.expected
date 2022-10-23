@@ -68,6 +68,7 @@ Card2 {
  xpos 1189
  ypos -59
 }
+push $Ndd70950
 Dot {
  name Dot22
  label "  "
@@ -99,6 +100,7 @@ Card2 {
  xpos 1364
  ypos -61
 }
+push $Nde790f0
 Dot {
  name Dot23
  label "  "
@@ -167,6 +169,7 @@ Card2 {
  xpos 2133
  ypos -61
 }
+push $Ne0e4310
 Cube {
  display wireframe
  render_mode wireframe
@@ -181,6 +184,7 @@ Cube {
  xpos 1235
  ypos 319
 }
+push 0
 ParticleEmitter {
  inputs 11
  start_frame {{CLOUDTASTIC_CONTROLS.start_frame-1}}

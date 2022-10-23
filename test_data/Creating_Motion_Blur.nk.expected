@@ -35,6 +35,7 @@ Tracker3 {
  xpos -210
  ypos -131
 }
+push $N3b44400
 VectorBlur2 {
  uv motion
  blur_type uniform
