@@ -5,6 +5,8 @@ pub struct IOError {
 
 impl IOError {
     pub fn new<T: ToString>(msg: T) -> Self {
-        Self { msg: msg.to_string() }
+        Self {
+            msg: msg.to_string(),
+        }
     }
 }

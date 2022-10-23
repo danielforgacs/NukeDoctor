@@ -1,16 +1,16 @@
+mod errors;
 mod parser;
 mod structs;
-mod errors;
 mod utils;
 mod modules {
-    pub use std::path::Path;
-    pub use std::fs::File;
-    pub use std::io::prelude::*;
-    pub use serde::{Serialize, Deserialize};
-    pub use super::structs::Node;
     pub use super::errors::IOError;
     pub use super::parser::parse;
+    pub use super::structs::Node;
     pub use super::utils::*;
+    pub use serde::{Deserialize, Serialize};
+    pub use std::fs::File;
+    pub use std::io::prelude::*;
+    pub use std::path::Path;
 }
 
 // use modules::*;
@@ -18,7 +18,6 @@ mod modules {
 fn main() {
     env_logger::init();
 }
-
 
 #[cfg(test)]
 mod test {
@@ -40,7 +39,8 @@ mod test {
         }
 
         init_log();
-        let cases: Vec<TestCase> = from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
+        let cases: Vec<TestCase> =
+            from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
         let case_count = cases.len();
         let mut test_count = 0;
         for case in cases {
