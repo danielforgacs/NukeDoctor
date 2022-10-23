@@ -30,20 +30,20 @@ impl Node {
     }
 
     pub fn to_text(&self) -> String {
-        if self.body.len() == 0 {
+        if self.body.is_empty() {
             return self.nodetype.clone();
         } else if ["push", "set"].contains(&self.nodetype.as_str()) {
-            return format!(r#"{} {}"#, String::from(self.nodetype.clone()), self.body,);
+            return format!(r#"{} {}"#, self.nodetype.clone(), self.body,);
         } else if self.group_name.is_some() {
             return format!(
                 r#" {} {{{}}}"#,
-                String::from(self.nodetype.clone()),
+                self.nodetype.clone(),
                 self.body,
             );
         }
         format!(
             r#"{} {{{}}}"#,
-            String::from(self.nodetype.clone()),
+            self.nodetype.clone(),
             self.body,
         )
     }
