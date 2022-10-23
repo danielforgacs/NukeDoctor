@@ -47,6 +47,7 @@ mod test {
             if case.enabled == 0 {
                 continue;
             }
+            log::debug!("[TEST] source: {}", &case.source);
             let source = read_file_to_string(&case.source).unwrap();
             let scene = clean_up_scene(source, case.source);
             let expected = read_file_to_string(&case.expected).unwrap();

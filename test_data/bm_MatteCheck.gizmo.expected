@@ -1,3 +1,4 @@
+push $cut_paste_input
 Group {
  name bm_MatteCheck
  help "A simple tool designed to ... checkerboard."
@@ -40,6 +41,7 @@ Keymix {
   xpos 279
   ypos -395
  }
+push $N836a7c00
 Constant {
   inputs 0
   color {{greyAmt} {greyAmt} {greyAmt} {curve}}
@@ -47,12 +49,14 @@ Constant {
   xpos 177
   ypos -404
  }
+push $N836a6800
 Keymix {
   inputs 3
   name Keymix2
   xpos 76
   ypos -387
  }
+push $N8370c800
 Constant {
   inputs 0
   color {{overlayColour.r} {overlayColour.g} {overlayColour.b} {curve}}
@@ -60,6 +64,7 @@ Constant {
   xpos -343
   ypos -346
  }
+push $N836a6c00
 Dot {
   name Dot1
   xpos -172

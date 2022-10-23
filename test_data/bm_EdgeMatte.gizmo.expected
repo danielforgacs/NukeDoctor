@@ -1,3 +1,4 @@
+push $cut_paste_input
 Group {
  name bm_EdgeMatte
  help "Created to \"edgeDetect\" mattes. ...an, controllable outline (like Edge Detect) from any... and the like."
