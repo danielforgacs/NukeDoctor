@@ -20,17 +20,17 @@
     "expected": "test_data/Creating_Motion_Blur.nk.expected"
   },
   {
-    "enabled": 0,
+    "enabled": 1,
     "source": "test_data/Cloudtastic.nk",
     "expected": "test_data/Cloudtastic.nk.expected"
   },
   {
-    "enabled": 0,
+    "enabled": 1,
     "source": "test_data/bm_MatteCheck.gizmo",
     "expected": "test_data/bm_MatteCheck.gizmo.expected"
   },
   {
-    "enabled": 0,
+    "enabled": 1,
     "source": "test_data/bm_EdgeMatte.gizmo",
     "expected": "test_data/bm_EdgeMatte.gizmo.expected"
   }

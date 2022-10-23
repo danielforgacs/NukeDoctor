@@ -41,6 +41,8 @@ mod test {
 
         init_log();
         let cases: Vec<TestCase> = from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
+        let case_count = cases.len();
+        let mut test_count = 0;
         for case in cases {
             if case.enabled == 0 {
                 continue;
@@ -49,6 +51,8 @@ mod test {
             let scene = clean_up_scene(source, case.source);
             let expected = read_file_to_string(&case.expected).unwrap();
             assert_eq!(scene, expected);
+            test_count += 1;
         }
+        assert_eq!(test_count, case_count);
     }
 }
