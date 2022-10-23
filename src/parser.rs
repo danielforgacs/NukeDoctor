@@ -26,6 +26,15 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                     body_index,
                     group.clone(),
                 ));
+            } else if word == "end_group" {
+                group = Option::None;
+                nodes.push(Node::new(
+                    word.clone(),
+                    "".to_string(),
+                    "".to_string(),
+                    index,
+                    group.clone(),
+                ));
             }
         }
         index += 1;
