@@ -7,7 +7,7 @@ struct NodeBump {
 }
 
 pub fn clean_up_scene(scene: String, path: String) -> String {
-    if scene.len() == 0 {
+    if scene.is_empty() {
         return "".to_string();
     }
     let source: Vec<char> = scene.chars().collect();

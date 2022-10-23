@@ -22,7 +22,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                 ));
             } else if word == "push" {
                 index += 1;
-                let body_index = index.clone();
+                let body_index = index;
                 let mut push_arg = String::with_capacity(100);
                 loop {
                     let char = source[index];
@@ -44,7 +44,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
                 ))
             } else if word == "set" {
                 index += 1;
-                let body_index = index.clone();
+                let body_index = index;
                 let arg1 = extract_word(&source, &mut index);
                 index += 1;
                 let mut arg2 = String::with_capacity(100);
@@ -106,7 +106,7 @@ fn skip_whitespace(source: &Vec<char>, index: &mut usize) {
     }
 }
 
-fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String) {
+fn parse_brackets(source: &Vec<char>, index: &mut usize) -> (String, String) {
     let mut body = String::with_capacity(10000);
     let mut name = String::with_capacity(100);
     let mut nesting = 1;
@@ -114,15 +114,15 @@ fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String)
     loop {
         let char = source[*index];
         if char.is_alphanumeric() {
-            let word = extract_word(&source, &mut index);
-            body += &word.as_str();
+            let word = extract_word(source, index);
+            body += word.as_str();
             *index -= 1;
             if word == "name" && source[*index + 1].is_whitespace() {
                 body.push(' ');
                 *index += 1;
                 *index += 1;
-                name = extract_word(&source, &mut index);
-                body += &name.as_str();
+                name = extract_word(source, index);
+                body += name.as_str();
                 *index -= 1;
             }
         } else if char == '{' {
@@ -153,13 +153,13 @@ fn crate_node(
     source: &Vec<char>,
     index: &mut usize,
 ) -> Node {
-    skip_whitespace(&source, index);
-    let body_index = index.clone() + 1;
-    let (name, body) = parse_brackets(&source, index);
+    skip_whitespace(source, index);
+    let body_index = *index + 1;
+    let (name, body) = parse_brackets(source, index);
     log::debug!("extracted body. index: {}", &index);
     let node = Node::new(word.clone(), name, body, body_index, group.clone());
     if word == "Group" {
-        *group = Option::Some(word.clone());
+        *group = Option::Some(word);
     } else if word == "end_group" {
         *group = Option::None;
     }
