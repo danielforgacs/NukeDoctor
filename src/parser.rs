@@ -10,22 +10,7 @@ pub fn parse(source: Vec<char>) -> Vec<Node> {
             let word = extract_word(&source, &mut index);
             log::debug!("found word: {}, index: {}", &word, &index);
             if source[index..=index+1] == [' ', '{'] {
-                if word == "Group" {
-                    group = Option::Some(word.clone());
-                } else if word == "end_group" {
-                    group = Option::None;
-                }
-                skip_whitespace(&source, &mut index);
-                let body_index = index.clone() + 1;
-                let (name, body) = parse_brackets(&source, &mut index);
-                log::debug!("extracted body. index: {}", &index);
-                nodes.push(Node::new(
-                    word,
-                    name,
-                    body,
-                    body_index,
-                    group.clone(),
-                ));
+                nodes.push(crate_node(word, &mut group, &source, &mut index))
             } else if word == "end_group" {
                 group = Option::None;
                 nodes.push(Node::new(
@@ -113,4 +98,23 @@ fn parse_brackets(source: &Vec<char>, mut index: &mut usize) -> (String, String)
         }
     }
     (name, body)
+}
+
+fn crate_node(word: String, group: &mut Option<String>, source: &Vec<char>, index: &mut usize) -> Node {
+    if word == "Group" {
+        *group = Option::Some(word.clone());
+    } else if word == "end_group" {
+        *group = Option::None;
+    }
+    skip_whitespace(&source, index);
+    let body_index = index.clone() + 1;
+    let (name, body) = parse_brackets(&source, index);
+    log::debug!("extracted body. index: {}", &index);
+    Node::new(
+        word,
+        name,
+        body,
+        body_index,
+        group.clone(),
+    )
 }
