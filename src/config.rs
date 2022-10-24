@@ -50,7 +50,6 @@ pub fn get_config() -> Config {
         .get_matches();
 
     let script = matches.get_one::<String>("script").unwrap().to_owned();
-    let ignore_node_types = matches.get_many::<String>("ignoretypes").unwrap().map(|a| a.to_string()).collect::<Vec<String>>();
     let mut config = Config::new(script);
     if matches.get_one::<String>("ignorecmd").is_some() {
         config.ignore_commands = true;
@@ -61,8 +60,8 @@ pub fn get_config() -> Config {
     if matches.get_one::<String>("emptynodes").is_some() {
         config.write_empty_ignored_nodes = true;
     }
-    if !ignore_node_types.is_empty() {
-        config.ignore_node_types = ignore_node_types;
+    if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
+        config.ignore_node_types = ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>();
     }
     config
 }
