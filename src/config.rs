@@ -4,9 +4,9 @@ use crate::modules::*;
 pub struct Config {
     script: String,
     ignore_commands: bool,
+    max_body_lines: usize,
     write_empty_ignored_nodes: bool,
     ignore_node_types: Vec<String>,
-    max_body_lines: usize,
 }
 
 impl Config {
@@ -14,9 +14,9 @@ impl Config {
         Self {
             script: path,
             ignore_commands: false,
+            max_body_lines: 1000,
             write_empty_ignored_nodes: false,
             ignore_node_types: Vec::new(),
-            max_body_lines: 1000,
         }
     }
 }
@@ -27,18 +27,38 @@ pub fn get_config() -> Config {
         .about("about stuff alksdfhj laskdfh alkjdfh aksdhf")
         .version(env!("CARGO_PKG_VERSION"))
         .args([
-            Arg::new("scene")
+            Arg::new("script")
             .required(true),
             Arg::new("ignorecmd")
             .help("ignore commands.")
-            .required(false)
+            .required(false),
+            Arg::new("maxbodylines")
+            .help("Ignore nodes with more line than this.")
+            .value_parser(clap::value_parser!(u16).range(2..))
+            .short('l'),
+            Arg::new("emptynodes")
+            .help("Write ignored nodes empty."),
+            Arg::new("ignoretypes")
+            .short('i')
+            .help("Ignore these node types.")
+            .num_args(1..)
         ])
         .get_matches();
 
-    let scene = matches.get_one::<String>("scene").unwrap().to_owned();
-    let mut config = Config::new(scene);
+    let script = matches.get_one::<String>("script").unwrap().to_owned();
+    let ignore_node_types = matches.get_many::<String>("ignoretypes").unwrap().map(|a| a.to_string()).collect::<Vec<String>>();
+    let mut config = Config::new(script);
     if matches.get_one::<String>("ignorecmd").is_some() {
         config.ignore_commands = true;
+    }
+    if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
+        config.max_body_lines = *lines as usize;
+    }
+    if matches.get_one::<String>("emptynodes").is_some() {
+        config.write_empty_ignored_nodes = true;
+    }
+    if !ignore_node_types.is_empty() {
+        config.ignore_node_types = ignore_node_types;
     }
     config
 }
