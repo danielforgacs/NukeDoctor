@@ -21,7 +21,13 @@ use modules::*;
 fn main() {
     env_logger::init();
     let config = get_config();
-    dbg!(&config);
+    let scene = read_file_to_string(&config.get_script()).unwrap();
+    match clean_up_scene(scene, config.get_script()) {
+        Ok(_) => {},
+        Err(msg) => {
+            println!("{}", msg);
+        }
+    };
 }
 
 #[cfg(test)]
@@ -55,7 +61,7 @@ mod test {
             let source = read_file_to_string(&case.source).unwrap();
             let scene = clean_up_scene(source, case.source);
             let expected = read_file_to_string(&case.expected).unwrap();
-            assert_eq!(scene, expected);
+            assert_eq!(scene.unwrap(), expected);
             test_count += 1;
         }
         assert_eq!(test_count, case_count);

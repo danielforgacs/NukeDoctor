@@ -6,9 +6,9 @@ struct NodeBump {
     nodes: Vec<Node>,
 }
 
-pub fn clean_up_scene(scene: String, path: String) -> String {
+pub fn clean_up_scene(scene: String, path: String) -> Result<String, String> {
     if scene.is_empty() {
-        return "".to_string();
+        return Err("The scene is empty.".to_string());
     }
     let source: Vec<char> = scene.chars().collect();
     log::info!("staring parsing.");
@@ -32,7 +32,7 @@ pub fn clean_up_scene(scene: String, path: String) -> String {
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", path), scene.clone())
         .expect("Can't save the doctored scene.");
-    scene
+    Ok(scene)
 }
 
 fn nodes_to_scene(nodes: &Vec<Node>) -> String {
