@@ -7,6 +7,7 @@ pub struct Node {
     body: String,
     body_index: usize,
     body_size: usize,
+    body_lines: usize,
     group_name: Option<String>,
 }
 
@@ -19,12 +20,14 @@ impl Node {
         group_name: Option<String>,
     ) -> Self {
         let body_size = body.len();
+        let body_lines = body.chars().filter(|char| char == &'\n').count();
         Self {
             nodetype,
             name,
             body,
             body_index,
             body_size,
+            body_lines,
             group_name,
         }
     }
