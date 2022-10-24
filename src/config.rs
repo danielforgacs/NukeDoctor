@@ -28,10 +28,17 @@ pub fn get_config() -> Config {
         .version(env!("CARGO_PKG_VERSION"))
         .args([
             Arg::new("scene")
-            .required(true)
+            .required(true),
+            Arg::new("ignorecmd")
+            .help("ignore commands.")
+            .required(false)
         ])
         .get_matches();
 
     let scene = matches.get_one::<String>("scene").unwrap().to_owned();
-    Config::new(scene)
+    let mut config = Config::new(scene);
+    if matches.get_one::<String>("ignorecmd").is_some() {
+        config.ignore_commands = true;
+    }
+    config
 }
