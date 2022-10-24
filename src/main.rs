@@ -8,22 +8,25 @@ mod modules {
     pub use super::parser::parse;
     pub use super::structs::Node;
     pub use super::utils::*;
+    pub use super::config::get_config;
     pub use serde::{Deserialize, Serialize};
     pub use std::fs::File;
     pub use std::io::prelude::*;
     pub use std::path::Path;
+    pub use clap::{Command, Arg};
 }
 
-// use modules::*;
+use modules::*;
 
 fn main() {
     env_logger::init();
+    let config = get_config();
+    dbg!(&config);
 }
 
 #[cfg(test)]
 mod test {
-    // use super::*;
-    use super::modules::*;
+    use super::*;
     pub use serde_json::from_str;
 
     fn init_log() {
