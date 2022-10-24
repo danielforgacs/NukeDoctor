@@ -2,6 +2,7 @@ mod errors;
 mod parser;
 mod structs;
 mod utils;
+mod config;
 mod modules {
     pub use super::errors::IOError;
     pub use super::parser::parse;
