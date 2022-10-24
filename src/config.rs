@@ -19,6 +19,10 @@ impl Config {
             ignore_node_types: Vec::new(),
         }
     }
+
+    pub fn get_script(&self) -> String {
+        self.script.clone()
+    }
 }
 
 pub fn get_config() -> Config {
