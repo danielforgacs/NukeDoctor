@@ -50,4 +50,8 @@ impl Node {
             self.body,
         )
     }
+
+    pub fn get_nodetype(&self) -> String {
+        self.nodetype.clone()
+    }
 }

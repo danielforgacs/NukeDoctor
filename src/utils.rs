@@ -13,13 +13,6 @@ pub fn clean_up_scene(scene: String, path: String) -> Result<String, String> {
     let source: Vec<char> = scene.chars().collect();
     log::info!("staring parsing.");
     let nodes = parse(source);
-    // DO FILTERING HERE
-    // BY
-    // - TYPE
-    // - NAME
-    // - BODY SIZE
-    // MARK NODES AS ACTIVE / NOT ACTIVE
-    // STILL DUMP NOT ACTOVE
     write_string_to_file(
         &format!("{}.json", path),
         serde_json::to_string_pretty(&NodeBump {
@@ -29,6 +22,14 @@ pub fn clean_up_scene(scene: String, path: String) -> Result<String, String> {
         .unwrap(),
     )
     .expect("Can't write node dump json file.");
+    // DO FILTERING HERE
+    // BY
+    // - TYPE
+    // - NAME
+    // - BODY SIZE
+    // MARK NODES AS ACTIVE / NOT ACTIVE
+    // STILL DUMP NOT ACTOVE
+    let nodes = nodes.into_iter().filter(|n| n.get_nodetype() != "Dot").collect::<Vec<Node>>();
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", path), scene.clone())
         .expect("Can't save the doctored scene.");
