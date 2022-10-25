@@ -22,6 +22,14 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         .unwrap(),
     )
     .expect("Can't write node dump json file.");
+    let nodes = filter_nodes(nodes, &config);
+    let scene = nodes_to_scene(&nodes);
+    write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
+        .expect("Can't save the doctored scene.");
+    Ok(scene)
+}
+
+fn filter_nodes(nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     // DO FILTERING HERE
     // BY
     // - TYPE
@@ -33,10 +41,7 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
     //     .into_iter()
     //     .filter(|n| n.get_nodetype() != "Dot")
     //     .collect::<Vec<Node>>();
-    let scene = nodes_to_scene(&nodes);
-    write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
-        .expect("Can't save the doctored scene.");
-    Ok(scene)
+    nodes
 }
 
 fn nodes_to_scene(nodes: &Vec<Node>) -> String {
