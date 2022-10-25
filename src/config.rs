@@ -23,6 +23,10 @@ impl Config {
     pub fn get_scene_file(&self) -> String {
         self.scene_file.clone()
     }
+
+    pub fn get_ignore_node_types(&self) -> &Vec<String> {
+        &self.ignore_node_types
+    }
 }
 
 pub fn get_config() -> Config {

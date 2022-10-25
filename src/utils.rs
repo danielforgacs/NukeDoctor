@@ -29,7 +29,7 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
     Ok(scene)
 }
 
-fn filter_nodes(nodes: Vec<Node>, config: &Config) -> Vec<Node> {
+fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     // DO FILTERING HERE
     // BY
     // - TYPE
@@ -41,6 +41,18 @@ fn filter_nodes(nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     //     .into_iter()
     //     .filter(|n| n.get_nodetype() != "Dot")
     //     .collect::<Vec<Node>>();
+    // dbg!(&config);
+    if !config.get_ignore_node_types().is_empty() {
+        log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
+        for ntype in config.get_ignore_node_types() {
+            nodes = nodes
+                .into_iter()
+                .filter(|n| n.get_nodetype() != *ntype)
+                .collect::<Vec<Node>>();
+        }
+
+    }
+
     nodes
 }
 
