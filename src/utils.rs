@@ -59,7 +59,7 @@ fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
             nodes
             .iter_mut()
             .for_each(|node| {
-                if node.get_body_lines() <= &max_lines {
+                if node.get_body_lines() > &max_lines {
                     node.set_write_empty_body();
                 }
             })
