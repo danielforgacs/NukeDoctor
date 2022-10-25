@@ -30,18 +30,6 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
 }
 
 fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
-    // DO FILTERING HERE
-    // BY
-    // - TYPE
-    // - NAME
-    // - BODY SIZE
-    // MARK NODES AS ACTIVE / NOT ACTIVE
-    // STILL DUMP NOT ACTOVE
-    // let nodes = nodes
-    //     .into_iter()
-    //     .filter(|n| n.get_nodetype() != "Dot")
-    //     .collect::<Vec<Node>>();
-    // dbg!(&config);
     if !config.get_ignore_node_types().is_empty() {
         log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
         for ntype in config.get_ignore_node_types() {
@@ -55,7 +43,7 @@ fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
         log::info!("Filtering by line count: {}.", &max_lines);
         nodes = nodes
             .into_iter()
-            .filter(|node| node.get_body_lines() < &max_lines)
+            .filter(|node| node.get_body_lines() <= &max_lines)
             .collect::<Vec<Node>>();
     }
     nodes
