@@ -50,9 +50,14 @@ fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
                 .filter(|n| n.get_nodetype() != *ntype)
                 .collect::<Vec<Node>>();
         }
-
     }
-
+    if let Some(max_lines) = config.get_max_body_lines() {
+        log::info!("Filtering by line count: {}.", &max_lines);
+        nodes = nodes
+            .into_iter()
+            .filter(|node| node.get_body_lines() < &max_lines)
+            .collect::<Vec<Node>>();
+    }
     nodes
 }
 
