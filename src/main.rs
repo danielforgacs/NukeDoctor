@@ -21,7 +21,6 @@ use modules::*;
 fn main() {
     env_logger::init();
     let config = get_config();
-    dbg!(&config);
     let scene = match read_file_to_string(&config.get_scene_file()) {
         Ok(scene) => scene,
         Err(error) => {
