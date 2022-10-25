@@ -71,32 +71,12 @@ pub fn get_config() -> Config {
     if matches.get_flag("nocmd") {
         config.ignore_commands = true;
     }
-    // if matches.contains_id("ignorecmd") {
-    //     config.ignore_commands = true;
-
-    // }
-    // // if let Some(ignorecmd) = matches.get_one::<String>("ignorecmd") {
-    // //     if ignorecmd != "ignorecmd" {
-    // //         panic!("wront ignorecmd arg.")
-    // //     }
-    // //     config.ignore_commands = true;
-    // // }
     if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
         config.max_body_lines = Some(*lines as usize);
     }
     if matches.get_flag("emptynodes") {
         config.write_empty_ignored_nodes = true;
     }
-
-    // if matches.contains_id("emptynodes") {
-    //     config.write_empty_ignored_nodes = true;
-    // }
-    // // if let Some(writeempty) = matches.get_one::<String>("emptynodes") {
-    // //     if writeempty != "writeempty" {
-    // //         panic!("wront writeempty arg.")
-    // //     }
-    // //     config.write_empty_ignored_nodes = true;
-    // // }
     if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
         config.ignore_node_types = ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>();
     }

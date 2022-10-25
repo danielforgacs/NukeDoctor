@@ -32,12 +32,6 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
 fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !config.get_ignore_node_types().is_empty() {
         log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
-        // for ntype in config.get_ignore_node_types() {
-        //     nodes = nodes
-        //         .into_iter()
-        //         .filter(|n| n.get_nodetype() != *ntype)
-        //         .collect::<Vec<Node>>();
-        //     }
         nodes = nodes
             .into_iter()
             .filter(|n| !config.get_ignore_node_types().contains(&n.get_nodetype()))
