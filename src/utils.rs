@@ -46,6 +46,13 @@ fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
             .filter(|node| node.get_body_lines() <= &max_lines)
             .collect::<Vec<Node>>();
     }
+    if *config.get_ignore_commands() {
+        log::info!("Ignoring commands.");
+        nodes = nodes
+            .into_iter()
+            .filter(|node| !["set", "push"].contains(&node.get_nodetype().as_str()))
+            .collect::<Vec<Node>>();
+    }
     nodes
 }
 

@@ -31,6 +31,10 @@ impl Config {
     pub fn get_max_body_lines(&self) -> &Option<usize> {
         &self.max_body_lines
     }
+
+    pub fn get_ignore_commands(&self) -> &bool {
+        &self.ignore_commands
+    }
 }
 
 pub fn get_config() -> Config {
