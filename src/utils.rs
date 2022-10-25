@@ -90,13 +90,14 @@ fn nodes_to_scene(nodes: &Vec<Node>) -> String {
     scene
 }
 
-pub fn read_file_to_string(path: &str) -> Result<String, IOError> {
+pub fn read_file_to_string(path: &str) -> Result<String, std::io::Error> {
     let mut buf = String::new();
-    let mut file_handle = File::open(path)
-        .map_err(|_err| IOError::new(format!("Error opening file for reading: {}", path)))?;
+    let mut file_handle = File::open(path)?;
+    // let mut file_handle = File::open(path)
+    //     .map_err(|_err| IOError::new(format!("Error opening file for reading: {}", path)))?;
     let _read_bytes = file_handle
-        .read_to_string(&mut buf)
-        .map_err(|_err| IOError::new(format!("Error reading file: {}", path)))?;
+        .read_to_string(&mut buf)?;
+        // .map_err(|_err| IOError::new(format!("Error reading file: {}", path)))?;
     Ok(buf)
 }
 

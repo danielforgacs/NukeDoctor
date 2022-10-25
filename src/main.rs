@@ -22,7 +22,14 @@ fn main() {
     env_logger::init();
     let config = get_config();
     dbg!(&config);
-    let scene = read_file_to_string(&config.get_scene_file()).unwrap();
+    let scene = match read_file_to_string(&config.get_scene_file()) {
+        Ok(scene) => scene,
+        Err(error) => {
+            println!("{}:", error.to_string());
+            println!("{}", config.get_scene_file());
+            return;
+        }
+    };
     match clean_up_scene(scene, config) {
         Ok(_) => {},
         Err(msg) => {
