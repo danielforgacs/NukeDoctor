@@ -55,13 +55,19 @@ pub fn get_config() -> Config {
 
     let script = matches.get_one::<String>("script").unwrap().to_owned();
     let mut config = Config::new(script);
-    if matches.get_one::<String>("ignorecmd").is_some() {
+    if let Some(ignorecmd) = matches.get_one::<String>("ignorecmd") {
+        if ignorecmd != "ignorecmd" {
+            panic!("wront ignorecmd arg.")
+        }
         config.ignore_commands = true;
     }
     if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
         config.max_body_lines = *lines as usize;
     }
-    if matches.get_one::<String>("emptynodes").is_some() {
+    if let Some(writeempty) = matches.get_one::<String>("emptynodes") {
+        if writeempty != "writeempty" {
+            panic!("wront writeempty arg.")
+        }
         config.write_empty_ignored_nodes = true;
     }
     if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
