@@ -6,7 +6,7 @@ struct NodeBump {
     nodes: Vec<Node>,
 }
 
-pub fn clean_up_scene(scene: String, path: String) -> Result<String, String> {
+pub fn clean_up_scene(scene: String, path: String, config: Config) -> Result<String, String> {
     if scene.is_empty() {
         return Err("The scene is empty.".to_string());
     }
@@ -29,7 +29,10 @@ pub fn clean_up_scene(scene: String, path: String) -> Result<String, String> {
     // - BODY SIZE
     // MARK NODES AS ACTIVE / NOT ACTIVE
     // STILL DUMP NOT ACTOVE
-    let nodes = nodes.into_iter().filter(|n| n.get_nodetype() != "Dot").collect::<Vec<Node>>();
+    // let nodes = nodes
+    //     .into_iter()
+    //     .filter(|n| n.get_nodetype() != "Dot")
+    //     .collect::<Vec<Node>>();
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", path), scene.clone())
         .expect("Can't save the doctored scene.");
