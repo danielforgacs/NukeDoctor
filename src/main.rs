@@ -13,7 +13,7 @@ mod modules {
     pub use std::fs::File;
     pub use std::io::prelude::*;
     pub use std::path::Path;
-    pub use clap::{Command, Arg};
+    pub use clap::{Command, Arg, ArgAction};
 }
 
 use modules::*;
