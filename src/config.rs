@@ -44,9 +44,20 @@ impl Config {
 pub fn get_config() -> Config {
     let matches = Command::new("nukedoctor")
         .name("nukedoctor")
-        .about("Tool that rewrites nukes scripts that take too long to open
+        .about("Tool that rewrites nuke scripts that take too long to open
 or even crash. This tool probably does not fix the issue itself,
-but helps identifying the node that causes the issue.")
+but helps identifying the node that causes the issue.
+The tool does not touch the original file. It saves
+a new one next to it with the name postfixed: \".doctored\".
+
+usage example:
+$ ./nukedoctor comp_scene_v001.nk --nocmd -l 7 --emptynodes -i Dot NoOp
+
+the scene will be rewritten as:
+comp_scene_v001.nk.doctored
+
+The json file is a data dump of the nodes found in the nuke scene.
+")
         .version(env!("CARGO_PKG_VERSION"))
         .args([
             Arg::new("script")
@@ -57,16 +68,16 @@ but helps identifying the node that causes the issue.")
             .long("nocmd")
             .action(ArgAction::SetTrue),
             Arg::new("maxbodylines")
-            .help("Only write nodes with less lines than maxbodylines.")
+            .help("Only write nodes with less lines than <maxbodylines>.")
             .short('l')
             .value_parser(clap::value_parser!(u16).range(0..1000)),
             Arg::new("emptynodes")
-            .help("Writes nodes that are filtered out empty. Can help keeping the node tree.")
+            .help("Writes nodes that are filtered out with the name only. Helps keeping the node tree while getting rid of heavy stuff.")
             .short('e')
             .long("emptynodes")
             .action(ArgAction::SetTrue),
             Arg::new("ignoretypes")
-            .help("Don't write nodes of these types.")
+            .help("Don't write nodes of these types. (Dot, NoOp, ...)")
             .short('i')
             .num_args(1..)
         ])
