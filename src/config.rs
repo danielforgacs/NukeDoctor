@@ -40,28 +40,30 @@ impl Config {
 pub fn get_config() -> Config {
     let matches = Command::new("nukedoctor")
         .name("nukedoctor")
-        .about("about stuff alksdfhj laskdfh alkjdfh aksdhf")
+        .about("Tool that rewrites nukes scripts that take too long to open
+or even crash. This tool probably does not fix the issue itself,
+but helps identifying the node that causes the issue.")
         .version(env!("CARGO_PKG_VERSION"))
         .args([
             Arg::new("script")
             .required(true),
             Arg::new("nocmd")
-            .help("Don't write commands.")
+            .help("Don't write commands. (set, push, ...)")
             .short('c')
             .long("nocmd")
             .action(ArgAction::SetTrue),
             Arg::new("maxbodylines")
-            .help("Only write nodes with less lines than this value.")
+            .help("Only write nodes with less lines than maxbodylines.")
             .short('l')
             .value_parser(clap::value_parser!(u16).range(0..1000)),
             Arg::new("emptynodes")
-            .help("Write ignored nodes empty.")
+            .help("Writes nodes that are filtered out empty. Can help keeping the node tree. !!! not working yet.")
             .short('e')
             .long("emptynodes")
             .action(ArgAction::SetTrue),
             Arg::new("ignoretypes")
+            .help("Don't write nodes of these types.")
             .short('i')
-            .help("Ignore these node types.")
             .num_args(1..)
         ])
         .get_matches();
