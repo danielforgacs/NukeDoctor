@@ -4,7 +4,7 @@ use crate::modules::*;
 pub struct Config {
     scene_file: String,
     ignore_commands: bool,
-    max_body_lines: usize,
+    max_body_lines: Option<usize>,
     write_empty_ignored_nodes: bool,
     ignore_node_types: Vec<String>,
 }
@@ -14,7 +14,7 @@ impl Config {
         Self {
             scene_file: path,
             ignore_commands: false,
-            max_body_lines: 1000,
+            max_body_lines: Option::None,
             write_empty_ignored_nodes: false,
             ignore_node_types: Vec::new(),
         }
@@ -26,6 +26,10 @@ impl Config {
 
     pub fn get_ignore_node_types(&self) -> &Vec<String> {
         &self.ignore_node_types
+    }
+
+    pub fn get_max_body_lines(&self) -> &Option<usize> {
+        &self.max_body_lines
     }
 }
 
@@ -62,7 +66,7 @@ pub fn get_config() -> Config {
         config.ignore_commands = true;
     }
     if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
-        config.max_body_lines = *lines as usize;
+        config.max_body_lines = Some(*lines as usize);
     }
     if let Some(writeempty) = matches.get_one::<String>("emptynodes") {
         if writeempty != "writeempty" {

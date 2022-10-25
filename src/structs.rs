@@ -54,4 +54,8 @@ impl Node {
     pub fn get_nodetype(&self) -> String {
         self.nodetype.clone()
     }
+
+    pub fn get_body_lines(&self) -> &usize {
+        &self.body_lines
+    }
 }
