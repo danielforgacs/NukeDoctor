@@ -2,7 +2,7 @@ use crate::modules::*;
 
 #[derive(Debug)]
 pub struct Config {
-    script: String,
+    scene_file: String,
     ignore_commands: bool,
     max_body_lines: usize,
     write_empty_ignored_nodes: bool,
@@ -10,9 +10,9 @@ pub struct Config {
 }
 
 impl Config {
-    fn new(path: String) -> Self {
+    pub fn new(path: String) -> Self {
         Self {
-            script: path,
+            scene_file: path,
             ignore_commands: false,
             max_body_lines: 1000,
             write_empty_ignored_nodes: false,
@@ -20,8 +20,8 @@ impl Config {
         }
     }
 
-    pub fn get_script(&self) -> String {
-        self.script.clone()
+    pub fn get_scene_file(&self) -> String {
+        self.scene_file.clone()
     }
 }
 

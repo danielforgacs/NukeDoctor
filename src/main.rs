@@ -8,7 +8,7 @@ mod modules {
     pub use super::parser::parse;
     pub use super::structs::Node;
     pub use super::utils::*;
-    pub use super::config::get_config;
+    pub use super::config::{Config, get_config};
     pub use serde::{Deserialize, Serialize};
     pub use std::fs::File;
     pub use std::io::prelude::*;
@@ -21,8 +21,8 @@ use modules::*;
 fn main() {
     env_logger::init();
     let config = get_config();
-    let scene = read_file_to_string(&config.get_script()).unwrap();
-    match clean_up_scene(scene, config.get_script()) {
+    let scene = read_file_to_string(&config.get_scene_file()).unwrap();
+    match clean_up_scene(scene, config.get_scene_file(), config) {
         Ok(_) => {},
         Err(msg) => {
             println!("{}", msg);
@@ -59,7 +59,8 @@ mod test {
             }
             log::debug!("[TEST] source: {}", &case.source);
             let source = read_file_to_string(&case.source).unwrap();
-            let scene = clean_up_scene(source, case.source);
+            let config = Config::new(case.source.clone());
+            let scene = clean_up_scene(source, case.source, config);
             let expected = read_file_to_string(&case.expected).unwrap();
             assert_eq!(scene.unwrap(), expected);
             test_count += 1;
