@@ -32,17 +32,38 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
 fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !config.get_ignore_node_types().is_empty() {
         log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
-        nodes = nodes
-            .into_iter()
-            .filter(|n| !config.get_ignore_node_types().contains(&n.get_nodetype()))
-            .collect::<Vec<Node>>();
+        if !*config.get_write_empty_ignored() {
+            nodes = nodes
+                .into_iter()
+                .filter(|n| !config.get_ignore_node_types().contains(&n.get_nodetype()))
+                .collect::<Vec<Node>>();
+        } else {
+            nodes
+            .iter_mut()
+            .for_each(|node| {
+                if config.get_ignore_node_types().contains(&node.get_nodetype()) {
+                    node.set_write_empty_body();
+                }
+            })
+        }
+
     }
     if let Some(max_lines) = config.get_max_body_lines() {
         log::info!("Filtering by line count: {}.", &max_lines);
-        nodes = nodes
-            .into_iter()
-            .filter(|node| node.get_body_lines() <= &max_lines)
-            .collect::<Vec<Node>>();
+        if !*config.get_write_empty_ignored() {
+            nodes = nodes
+                .into_iter()
+                .filter(|node| node.get_body_lines() <= &max_lines)
+                .collect::<Vec<Node>>();
+        } else {
+            nodes
+            .iter_mut()
+            .for_each(|node| {
+                if node.get_body_lines() <= &max_lines {
+                    node.set_write_empty_body();
+                }
+            })
+        }
     }
     if *config.get_ignore_commands() {
         log::info!("Ignoring commands.");
