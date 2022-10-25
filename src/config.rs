@@ -35,6 +35,10 @@ impl Config {
     pub fn get_ignore_commands(&self) -> &bool {
         &self.ignore_commands
     }
+
+    pub fn get_write_empty_ignored(&self) -> &bool {
+        &self.write_empty_ignored_nodes
+    }
 }
 
 pub fn get_config() -> Config {
@@ -57,7 +61,7 @@ but helps identifying the node that causes the issue.")
             .short('l')
             .value_parser(clap::value_parser!(u16).range(0..1000)),
             Arg::new("emptynodes")
-            .help("Writes nodes that are filtered out empty. Can help keeping the node tree. !!! not working yet.")
+            .help("Writes nodes that are filtered out empty. Can help keeping the node tree.")
             .short('e')
             .long("emptynodes")
             .action(ArgAction::SetTrue),
