@@ -45,15 +45,20 @@ pub fn get_config() -> Config {
         .args([
             Arg::new("script")
             .required(true),
-            Arg::new("ignorecmd")
-            .help("ignore commands.")
-            .required(false),
+            Arg::new("nocmd")
+            .help("Don't write commands.")
+            .short('c')
+            .long("nocmd")
+            .action(ArgAction::SetTrue),
             Arg::new("maxbodylines")
-            .help("Ignore nodes with more line than this.")
-            .value_parser(clap::value_parser!(u16).range(2..))
-            .short('l'),
+            .help("Only write nodes with less lines than this value.")
+            .short('l')
+            .value_parser(clap::value_parser!(u16).range(0..1000)),
             Arg::new("emptynodes")
-            .help("Write ignored nodes empty."),
+            .help("Write ignored nodes empty.")
+            .short('e')
+            .long("emptynodes")
+            .action(ArgAction::SetTrue),
             Arg::new("ignoretypes")
             .short('i')
             .help("Ignore these node types.")
@@ -63,21 +68,35 @@ pub fn get_config() -> Config {
 
     let script = matches.get_one::<String>("script").unwrap().to_owned();
     let mut config = Config::new(script);
-    if let Some(ignorecmd) = matches.get_one::<String>("ignorecmd") {
-        if ignorecmd != "ignorecmd" {
-            panic!("wront ignorecmd arg.")
-        }
+    if matches.get_flag("nocmd") {
         config.ignore_commands = true;
     }
+    // if matches.contains_id("ignorecmd") {
+    //     config.ignore_commands = true;
+
+    // }
+    // // if let Some(ignorecmd) = matches.get_one::<String>("ignorecmd") {
+    // //     if ignorecmd != "ignorecmd" {
+    // //         panic!("wront ignorecmd arg.")
+    // //     }
+    // //     config.ignore_commands = true;
+    // // }
     if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
         config.max_body_lines = Some(*lines as usize);
     }
-    if let Some(writeempty) = matches.get_one::<String>("emptynodes") {
-        if writeempty != "writeempty" {
-            panic!("wront writeempty arg.")
-        }
+    if matches.get_flag("emptynodes") {
         config.write_empty_ignored_nodes = true;
     }
+
+    // if matches.contains_id("emptynodes") {
+    //     config.write_empty_ignored_nodes = true;
+    // }
+    // // if let Some(writeempty) = matches.get_one::<String>("emptynodes") {
+    // //     if writeempty != "writeempty" {
+    // //         panic!("wront writeempty arg.")
+    // //     }
+    // //     config.write_empty_ignored_nodes = true;
+    // // }
     if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
         config.ignore_node_types = ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>();
     }

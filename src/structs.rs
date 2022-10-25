@@ -9,6 +9,7 @@ pub struct Node {
     body_size: usize,
     body_lines: usize,
     group_name: Option<String>,
+    write_empty_body: bool,
 }
 
 impl Node {
@@ -29,6 +30,7 @@ impl Node {
             body_size,
             body_lines,
             group_name,
+            write_empty_body: false,
         }
     }
 
@@ -57,5 +59,9 @@ impl Node {
 
     pub fn get_body_lines(&self) -> &usize {
         &self.body_lines
+    }
+
+    pub fn set_write_empty_body(&mut self) {
+        self.write_empty_body = false;
     }
 }
