@@ -6,7 +6,7 @@ struct NodeBump {
     nodes: Vec<Node>,
 }
 
-pub fn clean_up_scene(scene: String, path: String, config: Config) -> Result<String, String> {
+pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
     if scene.is_empty() {
         return Err("The scene is empty.".to_string());
     }
@@ -14,7 +14,7 @@ pub fn clean_up_scene(scene: String, path: String, config: Config) -> Result<Str
     log::info!("staring parsing.");
     let nodes = parse(source);
     write_string_to_file(
-        &format!("{}.json", path),
+        &format!("{}.json", config.get_scene_file()),
         serde_json::to_string_pretty(&NodeBump {
             node_count: nodes.len(),
             nodes: nodes.clone(),
@@ -34,7 +34,7 @@ pub fn clean_up_scene(scene: String, path: String, config: Config) -> Result<Str
     //     .filter(|n| n.get_nodetype() != "Dot")
     //     .collect::<Vec<Node>>();
     let scene = nodes_to_scene(&nodes);
-    write_string_to_file(&format!("{}.doctored", path), scene.clone())
+    write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
         .expect("Can't save the doctored scene.");
     Ok(scene)
 }
