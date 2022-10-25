@@ -29,12 +29,15 @@ fn main() {
             return;
         }
     };
+    log::info!("Loaded the scene file.");
     match clean_up_scene(scene, config) {
         Ok(_) => {},
         Err(msg) => {
             println!("{}", msg);
         }
     };
+    log::info!("finished.");
+    println!("Finished.");
 }
 
 #[cfg(test)]
