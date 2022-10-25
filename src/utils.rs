@@ -19,16 +19,14 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         serde_json::to_string_pretty(&NodeBump {
             node_count: nodes.len(),
             nodes: nodes.clone(),
-        })
-        .unwrap(),
-    )
-    .expect("Can't write node dump json file.");
+        }).map_err(|error| error.to_string())?
+    ).map_err(|error| error.to_string())?;
     log::info!("Dumped nodes data .json file.");
     let nodes = filter_nodes(nodes, &config);
     log::info!("Done filtering");
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
-        .expect("Can't save the doctored scene.");
+        .map_err(|error| error.to_string())?;
     Ok(scene)
 }
 
@@ -100,7 +98,7 @@ pub fn read_file_to_string(path: &str) -> Result<String, std::io::Error> {
     Ok(buf)
 }
 
-fn write_string_to_file(path: &str, data: String) -> Result<(), IOError> {
-    std::fs::write(path, data).map_err(|_err| IOError::new("Can't dump done json file."))?;
+fn write_string_to_file(path: &str, data: String) -> Result<(), std::io::Error> {
+    std::fs::write(path, data)?;
     Ok(())
 }
