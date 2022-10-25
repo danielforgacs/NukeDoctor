@@ -8,11 +8,12 @@ struct NodeBump {
 
 pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
     if scene.is_empty() {
+        log::info!("The scene is empty.");
         return Err("The scene is empty.".to_string());
     }
     let source: Vec<char> = scene.chars().collect();
-    log::info!("staring parsing.");
     let nodes = parse(source);
+    log::info!("done parsing.");
     write_string_to_file(
         &format!("{}.json", config.get_scene_file()),
         serde_json::to_string_pretty(&NodeBump {
@@ -22,7 +23,9 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         .unwrap(),
     )
     .expect("Can't write node dump json file.");
+    log::info!("Dumped nodes data .json file.");
     let nodes = filter_nodes(nodes, &config);
+    log::info!("Done filtering");
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
         .expect("Can't save the doctored scene.");
@@ -93,11 +96,7 @@ fn nodes_to_scene(nodes: &Vec<Node>) -> String {
 pub fn read_file_to_string(path: &str) -> Result<String, std::io::Error> {
     let mut buf = String::new();
     let mut file_handle = File::open(path)?;
-    // let mut file_handle = File::open(path)
-    //     .map_err(|_err| IOError::new(format!("Error opening file for reading: {}", path)))?;
-    let _read_bytes = file_handle
-        .read_to_string(&mut buf)?;
-        // .map_err(|_err| IOError::new(format!("Error reading file: {}", path)))?;
+    let _read_bytes = file_handle.read_to_string(&mut buf)?;
     Ok(buf)
 }
 
