@@ -113,7 +113,7 @@ checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
 
 [[package]]
 name = "nukedoctor"
-version = "2022.10.25"
+version = "2022.10.26"
 dependencies = [
  "clap",
  "env_logger",
