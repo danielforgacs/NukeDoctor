@@ -28,8 +28,7 @@ mod test {
     use super::*;
     pub use serde_json::from_str;
     use nukedoctor::project_modules::*;
-    // use crate::config::Config;
-    use nukedoctor::config::Config;
+    use nukedoctor::config::ConfigBuilder;
 
 
     fn init_log() {
@@ -57,7 +56,7 @@ mod test {
             {
                 log::debug!("[TEST] source: {}", &case.source);
                 let source = read_file_to_string(&case.source).unwrap();
-                let config = Config::new(case.source.clone());
+                let config = ConfigBuilder::build(case.source.clone()).finish();
                 let scene = clean_up_scene(source, config);
                 let expected = read_file_to_string(&case.expected).unwrap();
                 assert_eq!(scene.unwrap(), expected);
@@ -65,8 +64,9 @@ mod test {
             {
                 log::debug!("[TEST] source: {}", &case.source);
                 let source = read_file_to_string(&case.source).unwrap();
-                let mut config = Config::new(case.source.clone());
-                config._test_set_ignore_node_types(vec!["Dot".to_string(),]);
+                let config = ConfigBuilder::build(case.source.clone())
+                    .ignore_types(vec!["Dot".to_string(),])
+                    .finish();
                 let scene = clean_up_scene(source, config);
                 let expected = read_file_to_string(format!("{}_nodot", case.expected).as_str()).unwrap();
                 assert_eq!(scene.unwrap(), expected);
@@ -74,9 +74,10 @@ mod test {
             {
                 log::debug!("[TEST] source: {}", &case.source);
                 let source = read_file_to_string(&case.source).unwrap();
-                let mut config = Config::new(case.source.clone());
-                config._test_set_ignore_node_types(vec!["Dot".to_string(),]);
-                config._test_write_empty_node();
+                let config = ConfigBuilder::build(case.source.clone())
+                    .ignore_types(vec!["Dot".to_string(),])
+                    .write_ignored()
+                    .finish();
                 let scene = clean_up_scene(source, config);
                 let expected = read_file_to_string(format!("{}_nodot_empty", case.expected).as_str()).unwrap();
                 assert_eq!(scene.unwrap(), expected);
