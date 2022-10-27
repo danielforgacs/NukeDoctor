@@ -1,4 +1,6 @@
 use crate::modules::*;
+use nukedoctor::project_modules::*;
+use nukedoctor::structs::Node;
 
 #[derive(Debug, Clone, Serialize)]
 struct NodeBump {

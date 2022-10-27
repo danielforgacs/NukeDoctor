@@ -1,20 +1,16 @@
 mod parser;
-mod structs;
+// mod structs;
 mod utils;
 mod config;
 mod modules {
     pub use super::parser::parse;
-    pub use super::structs::Node;
+    // pub use super::structs::Node;
     pub use super::utils::*;
     pub use super::config::{Config, get_config};
-    pub use serde::{Deserialize, Serialize};
-    pub use std::fs::File;
-    pub use std::io::prelude::*;
-    pub use std::path::Path;
-    pub use clap::{Command, Arg, ArgAction};
 }
 
 use modules::*;
+// use nukedoctor::project_modules::*;
 
 fn main() {
     env_logger::init();
@@ -42,6 +38,7 @@ fn main() {
 mod test {
     use super::*;
     pub use serde_json::from_str;
+    use nukedoctor::project_modules::*;
 
     fn init_log() {
         let _ = env_logger::builder().is_test(true).try_init();
