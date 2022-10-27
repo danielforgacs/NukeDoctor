@@ -1,20 +1,7 @@
-// mod parser;
-// mod structs;
-// mod utils;
-// mod config;
-// mod modules {
-    // pub use super::parser::parse;
-    // pub use super::structs::Node;
-    // pub use super::utils::*;
-    // pub use super::config::get_config;
-// }
 mod config;
 mod utils;
 use config::get_config;
 use utils::{read_file_to_string, clean_up_scene};
-// use crate::
-// use modules::*;
-// use nukedoctor::project_modules::*;
 
 fn main() {
     env_logger::init();

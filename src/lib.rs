@@ -6,8 +6,6 @@ pub mod project_modules {
     pub use clap::{Command, Arg, ArgAction};
 }
 pub mod structs;
-// pub mod utils;
-// pub mod config;
 pub mod parser;
 
 
