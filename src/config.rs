@@ -1,12 +1,63 @@
 use super::project_modules::*;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct Config {
     scene_file: String,
     ignore_commands: bool,
     max_body_lines: Option<usize>,
     write_empty_ignored_nodes: bool,
     ignore_node_types: Vec<String>,
+}
+
+#[derive(Clone)]
+pub struct ConfigBuilder {
+    scene_file: String,
+    ignore_commands: bool,
+    max_body_lines: Option<usize>,
+    write_empty_ignored_nodes: bool,
+    ignore_node_types: Vec<String>,
+}
+
+impl ConfigBuilder {
+    pub fn build(path: String) -> Self {
+        ConfigBuilder {
+                scene_file: path,
+                ignore_commands: false,
+                max_body_lines: Option::None,
+                write_empty_ignored_nodes: false,
+                ignore_node_types: Vec::new(),
+            }
+        }
+
+    pub fn ignore_commands(&mut self) -> Self {
+        self.ignore_commands = true;
+        self.clone()
+    }
+
+    pub fn max_lines(&mut self, lines: usize) -> Self {
+        self.max_body_lines = Some(lines);
+        self.clone()
+    }
+
+    pub fn write_ignored(&mut self) -> Self {
+        self.write_empty_ignored_nodes = true;
+        self.clone()
+    }
+
+    pub fn ignore_types(&mut self, node_types: Vec<String>) -> Self {
+        self.ignore_node_types = node_types;
+        self.clone()
+    }
+
+    pub fn finish(&self) -> Config {
+        Config {
+            scene_file: self.scene_file.clone(),
+            ignore_commands: self.ignore_commands,
+            max_body_lines: self.max_body_lines,
+            write_empty_ignored_nodes: self.write_empty_ignored_nodes,
+            ignore_node_types: self.ignore_node_types.clone(),
+        }
+    }
 }
 
 impl Config {
@@ -92,18 +143,68 @@ The json file is a data dump of the nodes found in the nuke scene.
         .get_matches();
 
     let script = matches.get_one::<String>("script").unwrap().to_owned();
-    let mut config = Config::new(script);
+    let mut config = ConfigBuilder::build(script);
     if matches.get_flag("nocmd") {
-        config.ignore_commands = true;
+        config.ignore_commands();
     }
     if let Some(lines) = matches.get_one::<u16>("maxbodylines") {
-        config.max_body_lines = Some(*lines as usize);
+        config.max_lines(*lines as usize);
     }
     if matches.get_flag("emptynodes") {
-        config.write_empty_ignored_nodes = true;
+        config.write_ignored();
     }
     if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
-        config.ignore_node_types = ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>();
+        config.ignore_types(ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>());
     }
-    config
+    config.finish()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_config_builder_start() {
+        let config = ConfigBuilder::build("some_path".to_string()).finish();
+        let expected = Config {
+            scene_file: "some_path".to_string(),
+            ignore_commands: false,
+            max_body_lines: Option::None,
+            write_empty_ignored_nodes: false,
+            ignore_node_types: Vec::new(),
+        };
+        assert_eq!(config, expected);
+    }
+
+    #[test]
+    fn test_config_builder_ignore_commands() {
+        let config = ConfigBuilder::build("some_path".to_string())
+        .ignore_commands()
+        .finish();
+        let expected = Config {
+            scene_file: "some_path".to_string(),
+            ignore_commands: true,
+            max_body_lines: Option::None,
+            write_empty_ignored_nodes: false,
+            ignore_node_types: Vec::new(),
+        };
+        assert_eq!(config, expected);
+    }
+
+    #[test]
+    fn test_config_builder_max_lines_write_ignored() {
+        let config = ConfigBuilder::build("some_path".to_string())
+        .ignore_commands()
+        .max_lines(127)
+        .write_ignored()
+        .finish();
+        let expected = Config {
+            scene_file: "some_path".to_string(),
+            ignore_commands: true,
+            max_body_lines: Some(127),
+            write_empty_ignored_nodes: true,
+            ignore_node_types: Vec::new(),
+        };
+        assert_eq!(config, expected);
+    }
 }
