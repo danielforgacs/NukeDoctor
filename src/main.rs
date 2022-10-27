@@ -27,6 +27,7 @@ fn main() {
 mod test {
     use super::*;
     pub use serde_json::from_str;
+    use assert_cmd::Command;
     use nukedoctor::project_modules::*;
     use nukedoctor::config::ConfigBuilder;
 
@@ -36,6 +37,7 @@ mod test {
     }
 
     #[test]
+    #[ignore = "wip oher"]
     fn test_read_file_to_string() {
         #[derive(Deserialize)]
         struct TestCase {
@@ -85,5 +87,29 @@ mod test {
             test_count += 1;
         }
         assert_eq!(test_count, case_count);
+    }
+
+    #[test]
+    fn test_clean_up_scene() {
+        #[derive(Debug, Deserialize)]
+        struct TestCase {
+            script: String,
+            nocmd: Option<String>,
+            maxbodylines: Option<String>,
+            emptynodes: Option<String>,
+            ignoretypes: Option<String>,
+            expected: String,
+        }
+        init_log();
+        let cases: Vec<TestCase> = from_str(
+            &read_file_to_string("test_data_2/cases_2.json").unwrap())
+            .unwrap();
+        Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap()
+            .args([cases[0].script.clone()])
+            .ok().unwrap();
+        assert_eq!(
+            read_file_to_string(&cases[0].script.clone().as_str()).unwrap(),
+            read_file_to_string(&cases[0].expected.clone().as_str()).unwrap()
+        );
     }
 }

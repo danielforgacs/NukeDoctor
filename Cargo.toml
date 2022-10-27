@@ -4,6 +4,7 @@ version = "2022.10.26"
 edition = "2021"
 
 [dependencies]
+assert_cmd = "2.0.5"
 clap = "4.0.18"
 env_logger = "0.9.1"
 log = "0.4.17"
