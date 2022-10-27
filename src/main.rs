@@ -1,7 +1,5 @@
-mod config;
-mod utils;
-use config::get_config;
-use utils::{read_file_to_string, clean_up_scene};
+use nukedoctor::config::get_config;
+use nukedoctor::utils::{clean_up_scene, read_file_to_string};
 
 fn main() {
     env_logger::init();
@@ -30,7 +28,8 @@ mod test {
     use super::*;
     pub use serde_json::from_str;
     use nukedoctor::project_modules::*;
-    use crate::config::Config;
+    // use crate::config::Config;
+    use nukedoctor::config::Config;
 
 
     fn init_log() {
