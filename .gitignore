@@ -1,4 +1,4 @@
-test_data/*.json
+test_data/*data*.json
 test_data/*.doctored
 
 /target
