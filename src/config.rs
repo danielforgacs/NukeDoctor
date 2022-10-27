@@ -1,4 +1,4 @@
-use crate::modules::*;
+use super::project_modules::*;
 
 #[derive(Debug)]
 pub struct Config {

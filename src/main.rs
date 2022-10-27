@@ -1,40 +1,36 @@
-mod errors;
-mod parser;
-mod structs;
-mod utils;
-mod config;
-mod modules {
-    pub use super::errors::IOError;
-    pub use super::parser::parse;
-    pub use super::structs::Node;
-    pub use super::utils::*;
-    pub use super::config::{Config, get_config};
-    pub use serde::{Deserialize, Serialize};
-    pub use std::fs::File;
-    pub use std::io::prelude::*;
-    pub use std::path::Path;
-    pub use clap::{Command, Arg, ArgAction};
-}
-
-use modules::*;
+use nukedoctor::config::get_config;
+use nukedoctor::utils::{clean_up_scene, read_file_to_string};
 
 fn main() {
     env_logger::init();
     let config = get_config();
-    dbg!(&config);
-    let scene = read_file_to_string(&config.get_scene_file()).unwrap();
+    let scene = match read_file_to_string(&config.get_scene_file()) {
+        Ok(scene) => scene,
+        Err(error) => {
+            println!("{}:", error);
+            println!("{}", config.get_scene_file());
+            return;
+        }
+    };
+    log::info!("Loaded the scene file.");
     match clean_up_scene(scene, config) {
         Ok(_) => {},
         Err(msg) => {
             println!("{}", msg);
         }
     };
+    log::info!("finished.");
+    println!("Finished.");
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
     pub use serde_json::from_str;
+    use nukedoctor::project_modules::*;
+    // use crate::config::Config;
+    use nukedoctor::config::Config;
+
 
     fn init_log() {
         let _ = env_logger::builder().is_test(true).try_init();
