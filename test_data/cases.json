@@ -5,6 +5,14 @@
         "maxbodylines": null,
         "emptynodes": null,
         "ignoretypes": null,
-        "expected": "test_data/data_expected"
+        "expected": "test_data/expected_01"
+    },
+    "ignore_types": {
+        "script": "test_data/data",
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": "Dot",
+        "expected": "test_data/expected_02"
     }
 }

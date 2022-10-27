@@ -67,8 +67,13 @@ mod test {
             cmd.arg(ignore_types);
         }
         cmd.output().unwrap();
+        dbg!(&cmd);
+        dbg!(&case.script);
+        dbg!(&case.expected);
+        dbg!(read_file_to_string(&case.script.clone().as_str()).unwrap(),);
+        dbg!(read_file_to_string(&case.expected.clone().as_str()).unwrap());
         assert_eq!(
-            read_file_to_string(&case.script.clone().as_str()).unwrap(),
+            read_file_to_string(format!("{}.doctored", &case.script.clone()).as_str()).unwrap(),
             read_file_to_string(&case.expected.clone().as_str()).unwrap()
         );
     }
@@ -76,5 +81,10 @@ mod test {
     #[test]
     fn test_no_arg_run() {
         runner("no_arg");
+    }
+
+    #[test]
+    fn test_ignore_types() {
+        runner("ignore_types");
     }
 }
