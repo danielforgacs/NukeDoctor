@@ -9,7 +9,7 @@ fn main() {
     let scene = match read_file_to_string(&config.get_scene_file()) {
         Ok(scene) => scene,
         Err(error) => {
-            println!("{}:", error.to_string());
+            println!("{}:", error);
             println!("{}", config.get_scene_file());
             return;
         }
