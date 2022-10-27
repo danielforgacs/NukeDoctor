@@ -29,65 +29,11 @@ mod test {
     pub use serde_json::from_str;
     use assert_cmd::Command;
     use nukedoctor::project_modules::*;
-    use nukedoctor::config::ConfigBuilder;
 
-    const TEST_CASES: &str = "test_data_2/cases_2.json";
+    const TEST_CASES: &str = "test_data/cases.json";
 
     fn init_log() {
         let _ = env_logger::builder().is_test(true).try_init();
-    }
-
-    #[test]
-    #[ignore = "wip oher"]
-    fn test_read_file_to_string() {
-        #[derive(Deserialize)]
-        struct TestCase {
-            enabled: u8,
-            source: String,
-            expected: String,
-        }
-
-        init_log();
-        let cases: Vec<TestCase> =
-            from_str(&read_file_to_string("test_data/cases.json").unwrap()).unwrap();
-        let case_count = cases.len();
-        let mut test_count = 0;
-        for case in cases {
-            if case.enabled == 0 {
-                continue;
-            }
-            {
-                log::debug!("[TEST] source: {}", &case.source);
-                let source = read_file_to_string(&case.source).unwrap();
-                let config = ConfigBuilder::build(case.source.clone()).finish();
-                let scene = clean_up_scene(source, config);
-                let expected = read_file_to_string(&case.expected).unwrap();
-                assert_eq!(scene.unwrap(), expected);
-            }
-            {
-                log::debug!("[TEST] source: {}", &case.source);
-                let source = read_file_to_string(&case.source).unwrap();
-                let config = ConfigBuilder::build(case.source.clone())
-                    .ignore_types(vec!["Dot".to_string(),])
-                    .finish();
-                let scene = clean_up_scene(source, config);
-                let expected = read_file_to_string(format!("{}_nodot", case.expected).as_str()).unwrap();
-                assert_eq!(scene.unwrap(), expected);
-            }
-            {
-                log::debug!("[TEST] source: {}", &case.source);
-                let source = read_file_to_string(&case.source).unwrap();
-                let config = ConfigBuilder::build(case.source.clone())
-                    .ignore_types(vec!["Dot".to_string(),])
-                    .write_ignored()
-                    .finish();
-                let scene = clean_up_scene(source, config);
-                let expected = read_file_to_string(format!("{}_nodot_empty", case.expected).as_str()).unwrap();
-                assert_eq!(scene.unwrap(), expected);
-            }
-            test_count += 1;
-        }
-        assert_eq!(test_count, case_count);
     }
 
     fn runner(case_name: &str) {

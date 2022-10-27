@@ -1,37 +1,10 @@
-[
-  {
-    "enabled": 1,
-    "source": "test_data/scene01.nk",
-    "expected": "test_data/scene01.nk.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/Despilling_Greenscreen_and_Bluescree_Footage.nk",
-    "expected": "test_data/Despilling_Greenscreen_and_Bluescree_Footage.nk.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/DeepMerge_Advanced.gizmo",
-    "expected": "test_data/DeepMerge_Advanced.gizmo.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/Creating_Motion_Blur.nk",
-    "expected": "test_data/Creating_Motion_Blur.nk.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/Cloudtastic.nk",
-    "expected": "test_data/Cloudtastic.nk.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/bm_MatteCheck.gizmo",
-    "expected": "test_data/bm_MatteCheck.gizmo.expected"
-  },
-  {
-    "enabled": 1,
-    "source": "test_data/bm_EdgeMatte.gizmo",
-    "expected": "test_data/bm_EdgeMatte.gizmo.expected"
-  }
-]
+{
+    "no_arg": {
+        "script": "test_data/data",
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": null,
+        "expected": "test_data/data_expected"
+    }
+}
