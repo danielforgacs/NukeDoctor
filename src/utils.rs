@@ -25,12 +25,72 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         }).map_err(|error| error.to_string())?
     ).map_err(|error| error.to_string())?;
     log::info!("Dumped nodes data .json file.");
+
+    // SAME FUNCS, DIFFETENT IMPLEMENATION
     let nodes = filter_nodes(nodes, &config);
+    // let nodes = filter_nodes_2(nodes, &config);
+    // ---------------------------------------
+
     log::info!("Done filtering");
     let scene = nodes_to_scene(&nodes);
     write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
         .map_err(|error| error.to_string())?;
     Ok(scene)
+}
+
+fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
+    if !*config.get_write_empty_ignored() {
+        nodes = nodes
+        .into_iter()
+        .filter(|node| {
+            if !config.get_ignore_node_types().is_empty() {
+                if config.get_ignore_node_types().contains(&node.get_nodetype()) {
+                    false
+                } else {
+                    true
+                }
+            } else {
+                true
+            }
+        })
+        .filter(|node| {
+            if let Some(max_lines) = config.get_max_body_lines() {
+                if node.get_body_lines() <= max_lines {
+                    true
+                } else {
+                    false
+                }
+            } else {
+                true
+            }
+        })
+        .filter(|node| {
+            if *config.get_ignore_commands() {
+                if ["set", "push"].contains(&node.get_nodetype().as_str()) {
+                    false
+                } else {
+                    true
+                }
+            } else {
+                true
+            }
+        })
+        .collect::<Vec<Node>>();
+    } else {
+        nodes
+        .iter_mut()
+        .for_each(|node| {
+            if config.get_ignore_node_types().contains(&node.get_nodetype()) {
+                node.set_write_empty_body();
+            }
+            if let Some(max_lines) = config.get_max_body_lines() {
+                if node.get_body_lines() > max_lines {
+                    node.set_write_empty_body();
+                }
+            }
+        })
+    };
+    nodes
 }
 
 fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
