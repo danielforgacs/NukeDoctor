@@ -54,12 +54,23 @@ mod test {
             if case.enabled == 0 {
                 continue;
             }
-            log::debug!("[TEST] source: {}", &case.source);
-            let source = read_file_to_string(&case.source).unwrap();
-            let config = Config::new(case.source.clone());
-            let scene = clean_up_scene(source, config);
-            let expected = read_file_to_string(&case.expected).unwrap();
-            assert_eq!(scene.unwrap(), expected);
+            {
+                log::debug!("[TEST] source: {}", &case.source);
+                let source = read_file_to_string(&case.source).unwrap();
+                let config = Config::new(case.source.clone());
+                let scene = clean_up_scene(source, config);
+                let expected = read_file_to_string(&case.expected).unwrap();
+                assert_eq!(scene.unwrap(), expected);
+            }
+            {
+                log::debug!("[TEST] source: {}", &case.source);
+                let source = read_file_to_string(&case.source).unwrap();
+                let mut config = Config::new(case.source.clone());
+                config._test_set_ignore_node_types(vec!["Dot".to_string(),]);
+                let scene = clean_up_scene(source, config);
+                let expected = read_file_to_string(format!("{}_nodot", case.expected).as_str()).unwrap();
+                assert_eq!(scene.unwrap(), expected);
+            }
             test_count += 1;
         }
         assert_eq!(test_count, case_count);
