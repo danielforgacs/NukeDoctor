@@ -1,4 +1,4 @@
-use crate::structs::Node;
+use super::structs::Node;
 
 pub fn parse(source: Vec<char>) -> Vec<Node> {
     let mut nodes = Vec::with_capacity(5000);

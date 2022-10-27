@@ -1,4 +1,4 @@
-use crate::project_modules::*;
+use super::project_modules::*;
 use crate::structs::Node;
 use crate::parser::parse;
 use crate::config::Config;
