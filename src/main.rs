@@ -52,8 +52,8 @@ mod test {
         let case = cases.get(case_name).unwrap();
         Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap()
             .arg(case.script.clone())
-            .assert()
-            .success();
+            .output()
+            .unwrap();
         assert_eq!(
             read_file_to_string(&case.script.clone().as_str()).unwrap(),
             read_file_to_string(&case.expected.clone().as_str()).unwrap()
