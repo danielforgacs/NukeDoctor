@@ -51,8 +51,9 @@ mod test {
         let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
         let case = cases.get(case_name).unwrap();
         Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap()
-            .args([case.script.clone()])
-            .ok().unwrap();
+            .arg(case.script.clone())
+            .assert()
+            .success();
         assert_eq!(
             read_file_to_string(&case.script.clone().as_str()).unwrap(),
             read_file_to_string(&case.expected.clone().as_str()).unwrap()
