@@ -1,0 +1,65 @@
+Root {
+ inputs 0
+ last_frame 30
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+ColorWheel {
+ inputs 0
+ gamma 0.45
+ name ColorWheel1
+ xpos -66
+ ypos -289
+}
+Transform {
+ translate {{curve i x1 -670 x10 -380 x20 180 x25 210 640} {curve i x1 310 x10 -430 x20 310 x25 -440 290}}
+ scale 0.26
+ center {1024 778}
+ black_outside false
+ name Transform1
+ xpos -66
+ ypos -193
+}
+set N3b44400 [stack 0]
+Tracker3 {
+ track1 {{curve i x1 355 ... 848.9234619 1064.999634}}
+ offset1 {0 0}
+ search3 {-22 -22 22 22}
+ track4 {922 880}
+ offset4 {0 0}
+ pattern4 {-32 -32 32 32}
+ search4 {-22 -22 22 22}
+ translate {{curve i x1 0 26.03674316 ... -236.0765381 -20.00036621}}
+ center {{curve i x1 355 355 355 ... 355 355 355} {curve i x1 1085 1085 1085 1085 ... 1085 1085 1085}}
+ name Tracker1
+ xpos -210
+ ypos -131
+}
+push $N3b44400
+VectorBlur2 {
+ uv motion
+ blur_type uniform
+ scale 1
+ grow_bbox 100
+ normalize false
+ name VectorBlur2_1
+ xpos -66
+ ypos -86
+}
+Viewer {
+ frame_range 1-30
+ input_process false
+ name Viewer1
+ xpos -66
+ ypos -27
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0x9b9b9bff
+ label "The MotionBlur2D node uses 2D\ntransform data to ... bounding box \nusing the expand blur bbox control, so that the \ngenerated vectors cover the entire \nmotion blurred area."
+ note_font_size 18
+ xpos 64
+ ypos -247
+}
