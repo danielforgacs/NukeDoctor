@@ -1,15 +1,19 @@
-mod parser;
+// mod parser;
 // mod structs;
-mod utils;
-mod config;
-mod modules {
-    pub use super::parser::parse;
+// mod utils;
+// mod config;
+// mod modules {
+    // pub use super::parser::parse;
     // pub use super::structs::Node;
-    pub use super::utils::*;
-    pub use super::config::{Config, get_config};
-}
-
-use modules::*;
+    // pub use super::utils::*;
+    // pub use super::config::get_config;
+// }
+mod config;
+mod utils;
+use config::get_config;
+use utils::{read_file_to_string, clean_up_scene};
+// use crate::
+// use modules::*;
 // use nukedoctor::project_modules::*;
 
 fn main() {
@@ -39,6 +43,8 @@ mod test {
     use super::*;
     pub use serde_json::from_str;
     use nukedoctor::project_modules::*;
+    use crate::config::Config;
+
 
     fn init_log() {
         let _ = env_logger::builder().is_test(true).try_init();

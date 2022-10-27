@@ -1,6 +1,7 @@
 // use crate::modules::*;
 // use nukedoctor::project_modules::*;
-use nukedoctor::structs::Node;
+// use nukedoctor::structs::Node;
+use crate::structs::Node;
 
 pub fn parse(source: Vec<char>) -> Vec<Node> {
     let mut nodes = Vec::with_capacity(5000);
