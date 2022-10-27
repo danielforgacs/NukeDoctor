@@ -1,20 +1,7 @@
-// use crate::modules::*;
-// use nukedoctor::project_modules::*;
-// use nukedoctor::structs::Node;
-// use nukedoctor::project_modules::*
-// use crate::project_modules::*;
-// use crate::project_modules::*;
-// use crate::structs::Node;
 use crate::config::Config;
-// use crate::parser::parse;
-// use crate::project_modules::*;
 use std::fs::File;
 use std::io::Read;
-// use clap::Arg;
 use serde::Serialize;
-// use crate::structs::Node;
-// use crate::structs::Nodes;
-// use crate::Node;
 use nukedoctor::structs::Node;
 use nukedoctor::parser::parse;
 
