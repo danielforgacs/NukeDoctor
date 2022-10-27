@@ -1,9 +1,13 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use nukedoctor::fibonacci;
+use nukedoctor::utils::clean_up_scene;
+use nukedoctor::config::Config;
 
-pub fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("fib 20", |b| b.iter(|| fibonacci(black_box(20))));
+pub fn bench_clean_up_scene(c: &mut Criterion) {
+    c.bench_function("clean_up_scene() bench", |b| b.iter(|| clean_up_scene(
+        "/home/ford/storage/dev/NukeDoctor/test_data/Cloudtastic.nk".to_string(),
+        Config::new("/home/ford/storage/dev/NukeDoctor/test_data/Cloudtastic.nk".to_string())
+    )));
 }
 
-criterion_group!(benches, criterion_benchmark);
+criterion_group!(benches, bench_clean_up_scene);
 criterion_main!(benches);
