@@ -93,7 +93,7 @@ fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     nodes
 }
 
-fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
+pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !config.get_ignore_node_types().is_empty() {
         log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
         if !*config.get_write_empty_ignored() {
