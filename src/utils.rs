@@ -55,17 +55,17 @@ fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
 
     }
     if let Some(max_lines) = config.get_max_body_lines() {
-        log::info!("Filtering by line count: {}.", &max_lines);
+        log::info!("Filtering by line count: {}.", max_lines);
         if !*config.get_write_empty_ignored() {
             nodes = nodes
                 .into_iter()
-                .filter(|node| node.get_body_lines() <= &max_lines)
+                .filter(|node| node.get_body_lines() <= max_lines)
                 .collect::<Vec<Node>>();
         } else {
             nodes
             .iter_mut()
             .for_each(|node| {
-                if node.get_body_lines() > &max_lines {
+                if node.get_body_lines() > max_lines {
                     node.set_write_empty_body();
                 }
             })
