@@ -90,14 +90,6 @@ impl Config {
     pub fn get_write_empty_ignored(&self) -> &bool {
         &self.write_empty_ignored_nodes
     }
-
-    pub fn _test_set_ignore_node_types(&mut self, node_types: Vec<String>) {
-        self.ignore_node_types = node_types;
-    }
-
-    pub fn _test_write_empty_node(&mut self) {
-        self.write_empty_ignored_nodes = true;
-    }
 }
 
 pub fn get_config() -> Config {
