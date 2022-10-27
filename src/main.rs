@@ -31,6 +31,7 @@ mod test {
     use nukedoctor::project_modules::*;
     use nukedoctor::config::ConfigBuilder;
 
+    const TEST_CASES: &str = "test_data_2/cases_2.json";
 
     fn init_log() {
         let _ = env_logger::builder().is_test(true).try_init();
@@ -89,8 +90,7 @@ mod test {
         assert_eq!(test_count, case_count);
     }
 
-    #[test]
-    fn test_clean_up_scene() {
+    fn runner(case_name: &str) {
         #[derive(Debug, Deserialize)]
         struct TestCase {
             script: String,
@@ -101,15 +101,20 @@ mod test {
             expected: String,
         }
         init_log();
-        let cases: Vec<TestCase> = from_str(
-            &read_file_to_string("test_data_2/cases_2.json").unwrap())
-            .unwrap();
+        use std::collections::HashMap;
+        let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
+        let case = cases.get(case_name).unwrap();
         Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap()
-            .args([cases[0].script.clone()])
+            .args([case.script.clone()])
             .ok().unwrap();
         assert_eq!(
-            read_file_to_string(&cases[0].script.clone().as_str()).unwrap(),
-            read_file_to_string(&cases[0].expected.clone().as_str()).unwrap()
+            read_file_to_string(&case.script.clone().as_str()).unwrap(),
+            read_file_to_string(&case.expected.clone().as_str()).unwrap()
         );
+    }
+
+    #[test]
+    fn test_no_arg_run() {
+        runner("no_arg");
     }
 }
