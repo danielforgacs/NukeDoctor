@@ -50,10 +50,12 @@ mod test {
         use std::collections::HashMap;
         let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
         let case = cases.get(case_name).unwrap();
-        Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap()
-            .arg(case.script.clone())
-            .output()
-            .unwrap();
+        let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
+        cmd.arg(case.script.clone());
+        if case.nocmd.is_some() {
+            cmd.arg("-c");
+        }
+        cmd.output().unwrap();
         assert_eq!(
             read_file_to_string(&case.script.clone().as_str()).unwrap(),
             read_file_to_string(&case.expected.clone().as_str()).unwrap()
