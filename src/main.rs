@@ -55,6 +55,17 @@ mod test {
         if case.nocmd.is_some() {
             cmd.arg("-c");
         }
+        if let Some(lines) = &case.maxbodylines {
+            cmd.arg("-l");
+            cmd.arg(lines);
+        }
+        if case.emptynodes.is_some() {
+            cmd.arg("-e");
+        }
+        if let Some(ignore_types) = &case.ignoretypes {
+            cmd.arg("-i");
+            cmd.arg(ignore_types);
+        }
         cmd.output().unwrap();
         assert_eq!(
             read_file_to_string(&case.script.clone().as_str()).unwrap(),
