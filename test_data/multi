@@ -3,3 +3,13 @@ Node {
  name KEEP_THIS_0001
  3
 }
+Node {
+ name KEEP_THIS_0002
+}
+NodeB {
+ 1
+ name DROP_0001
+ 3
+ 4
+ 5
+}
