@@ -92,4 +92,9 @@ mod test {
     fn test_ignore_types_write_empty() {
         runner("ignore_types_write_empty");
     }
+
+    #[test]
+    fn test_max_lines() {
+        runner("max_lines");
+    }
 }
