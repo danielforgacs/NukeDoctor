@@ -38,5 +38,13 @@
         "emptynodes": null,
         "ignoretypes": "Dot",
         "expected": "test_data/Cloudtastic01.nk"
+    },
+    "multi_ignore_w_empty": {
+        "script": "example_scripts/Cloudtastic.nk",
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": "1",
+        "ignoretypes": "Dot",
+        "expected": "test_data/Cloudtastic02.nk"
     }
 }
