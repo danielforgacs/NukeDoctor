@@ -22,5 +22,11 @@
         "maxbodylines": null,
         "emptynodes": null,
         "ignoretypes": null
+    },
+    "max_lines": {
+        "nocmd": null,
+        "maxbodylines": "4",
+        "emptynodes": null,
+        "ignoretypes": null
     }
 }

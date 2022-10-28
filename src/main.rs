@@ -91,4 +91,9 @@ mod test {
     fn test_no_cmd() {
         runner("no_cmd");
     }
+
+    #[test]
+    fn test_max_lines() {
+        runner("max_lines");
+    }
 }
