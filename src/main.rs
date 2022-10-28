@@ -82,29 +82,4 @@ mod test {
     fn test_no_arg_run() {
         runner("no_arg");
     }
-
-    #[test]
-    fn test_ignore_types() {
-        runner("ignore_types");
-    }
-
-    #[test]
-    fn test_ignore_types_write_empty() {
-        runner("ignore_types_write_empty");
-    }
-
-    #[test]
-    fn test_max_lines() {
-        runner("max_lines");
-    }
-
-    #[test]
-    fn test_multi_ignore() {
-        runner("multi_ignore");
-    }
-
-    #[test]
-    fn test_multi_ignore_w_empty() {
-        runner("multi_ignore_w_empty");
-    }
 }
