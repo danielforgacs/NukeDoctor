@@ -33,6 +33,6 @@
         "nocmd": null,
         "maxbodylines": "3",
         "emptynodes": "e",
-        "ignoretypes": null
+        "ignoretypes": "IgnoreA"
     }
 }
