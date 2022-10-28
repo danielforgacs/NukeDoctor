@@ -72,7 +72,7 @@ mod test {
     }
 
     #[test]
-    fn test_no_arg_run() {
+    fn test_no_arg() {
         runner("no_arg");
     }
 }
