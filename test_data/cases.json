@@ -1,50 +1,10 @@
 {
     "no_arg": {
-        "script": "test_data/data",
+        "script": "test_data/no_arg",
         "nocmd": null,
         "maxbodylines": null,
         "emptynodes": null,
         "ignoretypes": null,
-        "expected": "test_data/expected_01"
-    },
-    "ignore_types": {
-        "script": "test_data/data",
-        "nocmd": null,
-        "maxbodylines": null,
-        "emptynodes": null,
-        "ignoretypes": "Dot",
-        "expected": "test_data/expected_02"
-    },
-    "ignore_types_write_empty": {
-        "script": "test_data/data",
-        "nocmd": null,
-        "maxbodylines": null,
-        "emptynodes": "1",
-        "ignoretypes": "Dot",
-        "expected": "test_data/expected_03"
-    },
-    "max_lines": {
-        "script": "test_data/data",
-        "nocmd": null,
-        "maxbodylines": "2",
-        "emptynodes": null,
-        "ignoretypes": null,
-        "expected": "test_data/expected_04"
-    },
-    "multi_ignore": {
-        "script": "example_scripts/Cloudtastic.nk",
-        "nocmd": null,
-        "maxbodylines": null,
-        "emptynodes": null,
-        "ignoretypes": "Dot",
-        "expected": "test_data/Cloudtastic01.nk"
-    },
-    "multi_ignore_w_empty": {
-        "script": "example_scripts/Cloudtastic.nk",
-        "nocmd": null,
-        "maxbodylines": null,
-        "emptynodes": "1",
-        "ignoretypes": "Dot",
-        "expected": "test_data/Cloudtastic02.nk"
+        "expected": "test_data/no_arg_expected"
     }
 }
