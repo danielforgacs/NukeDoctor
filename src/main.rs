@@ -47,32 +47,38 @@ mod test {
         init_log();
         use std::collections::HashMap;
         let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
-        let case = cases.get(case_name).unwrap();
+        let case_args = cases.get(case_name).unwrap();
+        let source_file = format!("test_data/{}", case_name);
+        let result_file = format!("test_data/{}.doctored", case_name);
+        let expacted_file = format!("test_data/{}.expected", case_name);
         let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
-        cmd.arg(case_name);
-        if case.nocmd.is_some() {
+        cmd.arg(source_file);
+        if case_args.nocmd.is_some() {
             cmd.arg("-c");
         }
-        if let Some(lines) = &case.maxbodylines {
+        if let Some(lines) = &case_args.maxbodylines {
             cmd.arg("-l").arg(lines);
         }
-        if case.emptynodes.is_some() {
+        if case_args.emptynodes.is_some() {
             cmd.arg("-e");
         }
-        if let Some(ignore_types) = &case.ignoretypes {
+        if let Some(ignore_types) = &case_args.ignoretypes {
             cmd.arg("-i").arg(ignore_types);
         }
         cmd.output().unwrap();
-        let result_name = format!("test_data/{}.doctored", case_name);
-        let expacted_name = format!("test_data/{}.expected", case_name);
         assert_eq!(
-            read_file_to_string(result_name.as_str()).unwrap(),
-            read_file_to_string(expacted_name.as_str()).unwrap(),
+            read_file_to_string(result_file.as_str()).unwrap(),
+            read_file_to_string(expacted_file.as_str()).unwrap(),
         );
     }
 
     #[test]
     fn test_no_arg() {
         runner("no_arg");
+    }
+
+    #[test]
+    fn test_no_dot_w_empty() {
+        runner("no_Dot_w_empty");
     }
 }
