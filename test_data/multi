@@ -9,12 +9,12 @@ Node {
 }
 NodeB {
  1
- name DROP_0001
+ name KEEP_NAME_ONLY_0001
  3
  4
  5
 }
 push arg1
 IgnoreA {
- name DROP_0002
+ name KEEP_NAME_ONLY_0002
 }

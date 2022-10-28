@@ -7,8 +7,8 @@ Node {
  name KEEP_THIS_0002
 }
 NodeB {
- name DROP_0001
+ name KEEP_NAME_ONLY_0001
 }
 IgnoreA {
- name DROP_0002
+ name KEEP_NAME_ONLY_0002
 }
