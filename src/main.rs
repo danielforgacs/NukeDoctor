@@ -86,4 +86,9 @@ mod test {
     fn test_no_dot() {
         runner("no_dot");
     }
+
+    #[test]
+    fn test_no_cmd() {
+        runner("no_cmd");
+    }
 }
