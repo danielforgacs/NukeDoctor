@@ -87,4 +87,9 @@ mod test {
     fn test_ignore_types() {
         runner("ignore_types");
     }
+
+    #[test]
+    fn test_ignore_types_write_empty() {
+        runner("ignore_types_write_empty");
+    }
 }
