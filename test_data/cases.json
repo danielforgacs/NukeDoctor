@@ -32,7 +32,7 @@
     "multi": {
         "nocmd": null,
         "maxbodylines": "3",
-        "emptynodes": null,
+        "emptynodes": "e",
         "ignoretypes": null
     }
 }
