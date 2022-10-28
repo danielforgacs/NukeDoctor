@@ -102,4 +102,9 @@ mod test {
     fn test_multi_ignore() {
         runner("multi_ignore");
     }
+
+    #[test]
+    fn test_multi_ignore_w_empty() {
+        runner("multi_ignore_w_empty");
+    }
 }
