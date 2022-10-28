@@ -30,5 +30,13 @@
         "emptynodes": null,
         "ignoretypes": null,
         "expected": "test_data/expected_04"
+    },
+    "multi_ignore": {
+        "script": "example_scripts/Cloudtastic.nk",
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": "Dot",
+        "expected": "test_data/Cloudtastic01.nk"
     }
 }
