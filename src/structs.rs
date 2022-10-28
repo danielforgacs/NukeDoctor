@@ -20,7 +20,10 @@ impl Node {
         group_name: Option<String>,
     ) -> Self {
         let body_size = body.len();
-        let body_lines = body.chars().filter(|char| char == &'\n').count() - 1;
+        let mut body_lines = body.chars().filter(|char| char == &'\n').count();
+        if body_lines > 0 {
+            body_lines -= 1;
+        }
         Self {
             nodetype,
             name,
