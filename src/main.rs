@@ -81,4 +81,9 @@ mod test {
     fn test_no_dot_w_empty() {
         runner("no_Dot_w_empty");
     }
+
+    #[test]
+    fn test_no_dot() {
+        runner("no_dot");
+    }
 }
