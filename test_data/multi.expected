@@ -9,3 +9,6 @@ Node {
 NodeB {
  name DROP_0001
 }
+IgnoreA {
+ name DROP_0002
+}

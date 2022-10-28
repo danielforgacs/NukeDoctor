@@ -13,3 +13,6 @@ NodeB {
  4
  5
 }
+IgnoreA {
+ name DROP_0002
+}
