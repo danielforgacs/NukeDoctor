@@ -1,7 +1,8 @@
 example_scripts/*.doctored
 example_scripts/*.json
 
-test_data/*data*.json
+!test_data/cases.json
+test_data/*.json
 test_data/*.doctored
 
 /target
