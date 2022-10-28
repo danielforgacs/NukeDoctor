@@ -96,4 +96,9 @@ mod test {
     fn test_max_lines() {
         runner("max_lines");
     }
+
+    #[test]
+    fn test_multi() {
+        runner("multi");
+    }
 }
