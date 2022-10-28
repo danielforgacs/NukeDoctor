@@ -14,5 +14,13 @@
         "emptynodes": null,
         "ignoretypes": "Dot",
         "expected": "test_data/expected_02"
+    },
+    "ignore_types_write_empty": {
+        "script": "test_data/data",
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": "1",
+        "ignoretypes": "Dot",
+        "expected": "test_data/expected_03"
     }
 }
