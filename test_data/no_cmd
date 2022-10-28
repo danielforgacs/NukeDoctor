@@ -1,0 +1,46 @@
+set cut_paste_input [stack 0]
+version 11.3 v5
+set Ndcf5e60 [stack 0]
+set Nddf0140 [stack 0]
+Dot {
+ name Dot1
+ label "Just a Dot"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos 0
+ ypos 0
+}
+set Ndd70950 [stack 0]
+push $Ndd70950
+push $Nde790f0
+NoOp {
+ name NoOp1
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
+Dot {
+ name Dot2
+ label "Just a Dot"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos 0
+ ypos 0
+}
+set Nde790f0 [stack 0]
+push $Ne053c20
+NoOp {
+ name NoOp2
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
+push $Ne0e4310

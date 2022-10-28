@@ -16,5 +16,11 @@
         "maxbodylines": null,
         "emptynodes": null,
         "ignoretypes": "Dot"
+    },
+    "no_cmd": {
+        "nocmd": "c",
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": null
     }
 }

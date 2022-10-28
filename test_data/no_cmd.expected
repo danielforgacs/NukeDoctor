@@ -1,0 +1,36 @@
+Dot {
+ name Dot1
+ label "Just a Dot"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos 0
+ ypos 0
+}
+NoOp {
+ name NoOp1
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
+Dot {
+ name Dot2
+ label "Just a Dot"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos 0
+ ypos 0
+}
+NoOp {
+ name NoOp2
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
