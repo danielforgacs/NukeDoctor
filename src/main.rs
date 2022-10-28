@@ -39,42 +39,35 @@ mod test {
     fn runner(case_name: &str) {
         #[derive(Debug, Deserialize)]
         struct TestCase {
-            script: String,
             nocmd: Option<String>,
             maxbodylines: Option<String>,
             emptynodes: Option<String>,
             ignoretypes: Option<String>,
-            expected: String,
         }
         init_log();
         use std::collections::HashMap;
         let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
         let case = cases.get(case_name).unwrap();
         let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
-        cmd.arg(case.script.clone());
+        cmd.arg(case_name);
         if case.nocmd.is_some() {
             cmd.arg("-c");
         }
         if let Some(lines) = &case.maxbodylines {
-            cmd.arg("-l");
-            cmd.arg(lines);
+            cmd.arg("-l").arg(lines);
         }
         if case.emptynodes.is_some() {
             cmd.arg("-e");
         }
         if let Some(ignore_types) = &case.ignoretypes {
-            cmd.arg("-i");
-            cmd.arg(ignore_types);
+            cmd.arg("-i").arg(ignore_types);
         }
         cmd.output().unwrap();
-        dbg!(&cmd);
-        dbg!(&case.script);
-        dbg!(&case.expected);
-        dbg!(read_file_to_string(&case.script.clone().as_str()).unwrap(),);
-        dbg!(read_file_to_string(&case.expected.clone().as_str()).unwrap());
+        let result_name = format!("test_data/{}.doctored", case_name);
+        let expacted_name = format!("test_data/{}.expected", case_name);
         assert_eq!(
-            read_file_to_string(format!("{}.doctored", &case.script.clone()).as_str()).unwrap(),
-            read_file_to_string(&case.expected.clone().as_str()).unwrap()
+            read_file_to_string(result_name.as_str()).unwrap(),
+            read_file_to_string(expacted_name.as_str()).unwrap(),
         );
     }
 
