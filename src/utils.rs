@@ -38,7 +38,7 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
     Ok(scene)
 }
 
-fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
+pub fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !*config.get_write_empty_ignored() {
         nodes = nodes
         .into_iter()
