@@ -52,7 +52,7 @@ mod test {
         let result_file = format!("test_data/{}.doctored", case_name);
         let expacted_file = format!("test_data/{}.expected", case_name);
         let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
-        cmd.arg(source_file);
+        cmd.arg(source_file.clone());
         if case_args.nocmd.is_some() {
             cmd.arg("-c");
         }
@@ -66,6 +66,11 @@ mod test {
             cmd.arg("-i").arg(ignore_types);
         }
         cmd.output().unwrap();
+        dbg!(&case_args);
+        dbg!(&cmd);
+        dbg!(&source_file);
+        dbg!(&result_file);
+        dbg!(&expacted_file);
         assert_eq!(
             read_file_to_string(result_file.as_str()).unwrap(),
             read_file_to_string(expacted_file.as_str()).unwrap(),
