@@ -3,6 +3,7 @@ Node {
  name KEEP_THIS_0001
  3
 }
+set arg1 arg2
 Node {
  name KEEP_THIS_0002
 }
@@ -13,6 +14,7 @@ NodeB {
  4
  5
 }
+push arg1
 IgnoreA {
  name DROP_0002
 }

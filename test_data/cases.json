@@ -30,7 +30,7 @@
         "ignoretypes": null
     },
     "multi": {
-        "nocmd": null,
+        "nocmd": "c",
         "maxbodylines": "3",
         "emptynodes": "e",
         "ignoretypes": "IgnoreA"
