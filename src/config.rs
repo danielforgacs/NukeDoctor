@@ -23,14 +23,14 @@ pub struct ConfigBuilder {
 impl ConfigBuilder {
     pub fn build(path: String) -> Self {
         ConfigBuilder {
-                scene_file: path,
-                ignore_commands: false,
-                max_body_lines: Option::None,
-                write_empty_ignored_nodes: false,
-                ignore_node_types: Vec::new(),
-                empty_groups: false,
-            }
+            scene_file: path,
+            ignore_commands: false,
+            max_body_lines: Option::None,
+            write_empty_ignored_nodes: false,
+            ignore_node_types: Vec::new(),
+            empty_groups: false,
         }
+    }
 
     pub fn ignore_commands(&mut self) -> &mut Self {
         self.ignore_commands = true;
@@ -201,8 +201,8 @@ mod tests {
     #[test]
     fn test_config_builder_ignore_commands() {
         let config = ConfigBuilder::build("some_path".to_string())
-        .ignore_commands()
-        .finish();
+            .ignore_commands()
+            .finish();
         let expected = Config {
             scene_file: "some_path".to_string(),
             ignore_commands: true,
@@ -217,11 +217,11 @@ mod tests {
     #[test]
     fn test_config_builder_max_lines_write_ignored() {
         let config = ConfigBuilder::build("some_path".to_string())
-        .ignore_commands()
-        .max_lines(127)
-        .write_ignored()
-        .write_empty_groups()
-        .finish();
+            .ignore_commands()
+            .max_lines(127)
+            .write_ignored()
+            .write_empty_groups()
+            .finish();
         let expected = Config {
             scene_file: "some_path".to_string(),
             ignore_commands: true,

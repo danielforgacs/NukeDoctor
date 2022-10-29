@@ -1,7 +1,7 @@
 use super::project_modules::*;
-use crate::structs::Node;
-use crate::parser::parse;
 use crate::config::Config;
+use crate::parser::parse;
+use crate::structs::Node;
 
 #[derive(Debug, Clone, Serialize)]
 struct NodeBump {
@@ -22,8 +22,10 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         serde_json::to_string_pretty(&NodeBump {
             node_count: nodes.len(),
             nodes: nodes.clone(),
-        }).map_err(|error| error.to_string())?
-    ).map_err(|error| error.to_string())?;
+        })
+        .map_err(|error| error.to_string())?,
+    )
+    .map_err(|error| error.to_string())?;
     log::info!("Dumped nodes data .json file.");
 
     // SAME FUNCS, DIFFETENT IMPLEMENATION
@@ -33,8 +35,11 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
 
     log::info!("Done filtering");
     let scene = nodes_to_scene(&nodes);
-    write_string_to_file(&format!("{}.doctored", config.get_scene_file()), scene.clone())
-        .map_err(|error| error.to_string())?;
+    write_string_to_file(
+        &format!("{}.doctored", config.get_scene_file()),
+        scene.clone(),
+    )
+    .map_err(|error| error.to_string())?;
     Ok(scene)
 }
 /*
@@ -84,22 +89,25 @@ pub fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
 
 pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !config.get_ignore_node_types().is_empty() {
-        log::info!("Filtering by node types. {:?}", &config.get_ignore_node_types());
+        log::info!(
+            "Filtering by node types. {:?}",
+            &config.get_ignore_node_types()
+        );
         if !*config.get_write_empty_ignored() {
             nodes = nodes
                 .into_iter()
                 .filter(|n| !config.get_ignore_node_types().contains(&n.get_nodetype()))
                 .collect::<Vec<Node>>();
         } else {
-            nodes
-            .iter_mut()
-            .for_each(|node| {
-                if config.get_ignore_node_types().contains(&node.get_nodetype()) {
+            nodes.iter_mut().for_each(|node| {
+                if config
+                    .get_ignore_node_types()
+                    .contains(&node.get_nodetype())
+                {
                     node.set_write_empty_body();
                 }
             })
         }
-
     }
     if let Some(max_lines) = config.get_max_body_lines() {
         log::info!("Filtering by line count: {}.", max_lines);
@@ -109,9 +117,7 @@ pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
                 .filter(|node| node.get_body_lines() <= max_lines)
                 .collect::<Vec<Node>>();
         } else {
-            nodes
-            .iter_mut()
-            .for_each(|node| {
+            nodes.iter_mut().for_each(|node| {
                 if node.get_body_lines() > max_lines {
                     node.set_write_empty_body();
                 }
@@ -124,7 +130,6 @@ pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
             .into_iter()
             .filter(|node| !node.get_group_name().is_some())
             .collect::<Vec<Node>>();
-
     }
     if *config.get_ignore_commands() {
         log::info!("Ignoring commands.");

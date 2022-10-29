@@ -14,7 +14,7 @@ fn main() {
     };
     log::info!("Loaded the scene file.");
     match clean_up_scene(scene, config) {
-        Ok(_) => {},
+        Ok(_) => {}
         Err(msg) => {
             println!("{}", msg);
         }
@@ -26,9 +26,9 @@ fn main() {
 #[cfg(test)]
 mod test {
     use super::*;
-    pub use serde_json::from_str;
     use assert_cmd::Command;
     use nukedoctor::project_modules::*;
+    pub use serde_json::from_str;
 
     const TEST_CASES: &str = "test_data/cases.json";
 
@@ -47,7 +47,9 @@ mod test {
         }
         init_log();
         use std::collections::HashMap;
-        let cases = from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap()).unwrap();
+        let cases =
+            from_str::<HashMap<String, TestCase>>(&read_file_to_string(TEST_CASES).unwrap())
+                .unwrap();
         let case_args = cases.get(case_name).unwrap();
         let source_file = format!("test_data/{}", case_name);
         let result_file = format!("test_data/{}.doctored", case_name);
