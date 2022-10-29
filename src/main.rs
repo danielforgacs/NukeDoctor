@@ -63,7 +63,8 @@ mod test {
             cmd.arg("-e");
         }
         if let Some(ignore_types) = &case_args.ignoretypes {
-            cmd.arg("-i").arg(ignore_types);
+            // cmd.arg("-i").arg(ignore_types);
+            cmd.arg("-i").args(ignore_types.split(' '));
         }
         cmd.output().unwrap();
         dbg!(&case_args);
