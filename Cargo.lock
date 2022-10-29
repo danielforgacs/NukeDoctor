@@ -362,7 +362,7 @@ dependencies = [
 
 [[package]]
 name = "nukedoctor"
-version = "2022.10.26"
+version = "2022.10.29"
 dependencies = [
  "assert_cmd",
  "clap 4.0.18",
