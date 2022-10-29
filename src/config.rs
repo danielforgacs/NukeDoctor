@@ -148,6 +148,11 @@ The json file is a data dump of the nodes found in the nuke scene.
             .short('e')
             .long("emptynodes")
             .action(ArgAction::SetTrue),
+            Arg::new("emptygroups")
+            .help("Writes Groups empty.")
+            .short('g')
+            .long("emptygroups")
+            .action(ArgAction::SetTrue),
             Arg::new("ignoretypes")
             .help("Don't write nodes of these types. (Dot, NoOp, ...)")
             .short('i')
@@ -165,6 +170,9 @@ The json file is a data dump of the nodes found in the nuke scene.
     }
     if matches.get_flag("emptynodes") {
         config.write_ignored();
+    }
+    if matches.get_flag("emptygroups") {
+        config.write_empty_groups();
     }
     if let Some(ignoretypes) = matches.get_many::<String>("ignoretypes") {
         config.ignore_types(ignoretypes.map(|a| a.to_string()).collect::<Vec<String>>());
