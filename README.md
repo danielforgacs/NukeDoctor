@@ -39,7 +39,7 @@ Options:
 
 ## building
 
-### [Download](https://rustup.rs/) [Rust](https://www.rust-lang.org/)
+#### [**Download**](https://rustup.rs/) [Rust](https://www.rust-lang.org/)
 
 ```
 # build the binary:
