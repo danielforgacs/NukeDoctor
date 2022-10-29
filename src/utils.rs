@@ -129,6 +129,14 @@ pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
             })
         }
     }
+    if *config.get_empty_groups() {
+        log::info!("Skipping group nodes.");
+        nodes = nodes
+            .into_iter()
+            .filter(|node| !node.get_group_name().is_some())
+            .collect::<Vec<Node>>();
+
+    }
     if *config.get_ignore_commands() {
         log::info!("Ignoring commands.");
         nodes = nodes
