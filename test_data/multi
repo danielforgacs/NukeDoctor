@@ -18,3 +18,8 @@ push arg1
 IgnoreA {
  name KEEP_NAME_ONLY_0002
 }
+IgnoreB {
+ data
+ name KEEP_NAME_ONLY_0003
+ 3
+}
