@@ -43,6 +43,7 @@ mod test {
             maxbodylines: Option<String>,
             emptynodes: Option<String>,
             ignoretypes: Option<String>,
+            empty_groups: Option<String>,
         }
         init_log();
         use std::collections::HashMap;
@@ -61,6 +62,9 @@ mod test {
         }
         if case_args.emptynodes.is_some() {
             cmd.arg("-e");
+        }
+        if case_args.empty_groups.is_some() {
+            cmd.arg("-g");
         }
         if let Some(ignore_types) = &case_args.ignoretypes {
             cmd.arg("-i").args(ignore_types.split(' '));
@@ -105,5 +109,10 @@ mod test {
     #[test]
     fn test_multi() {
         runner("multi");
+    }
+
+    #[test]
+    fn test_empty_groups() {
+        runner("empty_groups");
     }
 }

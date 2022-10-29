@@ -34,5 +34,8 @@
         "maxbodylines": "3",
         "emptynodes": "e",
         "ignoretypes": "IgnoreA IgnoreB"
+    },
+    "empty_groups": {
+        "empty_groups": "g"
     }
 }

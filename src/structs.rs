@@ -62,6 +62,10 @@ impl Node {
         &self.body_lines
     }
 
+    pub fn get_group_name(&self) -> &Option<String> {
+        &self.group_name
+    }
+
     pub fn set_write_empty_body(&mut self) {
         if !["push", "set"].contains(&self.nodetype.as_ref()) {
             self.body = format!("\n name {}\n", self.name);
