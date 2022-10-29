@@ -2,9 +2,9 @@
 
 Tool that rewrites nuke scripts that take too long to open
 or even crash. This tool probably does not fix the issue itself,
-but helps identifying the node that causes the issue.
+but helps identifying the node that causes it.
 The tool does not touch the original file. It saves
-a new one next to it with the name postfixed: ".doctored".
+a new one next to it with the name postfixed: `.doctored`.
 
 ### usage example:
 ```
@@ -14,7 +14,7 @@ $ ./nukedoctor comp_scene_v001.nk --nocmd -l 7 --emptynodes --emptygroups -i Dot
 the scene will be rewritten as:
 `comp_scene_v001.nk.doctored`
 
-The **json file is a data dump of the nodes** found in the nuke scene.
+The json file is just a data dump of the nodes found in the nuke scene. It's just for info.
 
 ```
 Usage: nukedoctor [OPTIONS] <script>
