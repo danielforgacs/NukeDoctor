@@ -1,6 +1,6 @@
 [package]
 name = "nukedoctor"
-version = "2022.10.26"
+version = "2022.10.29"
 edition = "2021"
 
 [dependencies]
