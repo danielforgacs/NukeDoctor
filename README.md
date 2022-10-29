@@ -36,3 +36,18 @@ Options:
 
 [BenMcEwan](https://github.com/BenMcEwan/nuke_public)  
 [chrisfryer](https://www.chrisfryer.co.uk/post/cf_tools-demo-nuke-script)
+
+## building
+
+### [Download](https://rustup.rs/) [Rust](https://www.rust-lang.org/)
+
+```
+# build the binary:
+NukeDoctor/ $> cargo build --release
+
+# oprionally make the binary smaller:
+NukeDoctor/ $> strip ./target/release/nukedoctor
+
+# The biary is this file:
+# target/release/nukedoctor
+```
