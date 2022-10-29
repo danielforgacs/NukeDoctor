@@ -41,17 +41,9 @@ impl Node {
         } else if ["push", "set"].contains(&self.nodetype.as_str()) {
             return format!(r#"{} {}"#, self.nodetype.clone(), self.body,);
         } else if self.group_name.is_some() {
-            return format!(
-                r#" {} {{{}}}"#,
-                self.nodetype.clone(),
-                self.body,
-            );
+            return format!(r#" {} {{{}}}"#, self.nodetype.clone(), self.body,);
         }
-        format!(
-            r#"{} {{{}}}"#,
-            self.nodetype.clone(),
-            self.body,
-        )
+        format!(r#"{} {{{}}}"#, self.nodetype.clone(), self.body,)
     }
 
     pub fn get_nodetype(&self) -> String {
