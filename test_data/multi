@@ -1,0 +1,25 @@
+Node {
+ 1
+ name KEEP_THIS_0001
+ 3
+}
+set arg1 arg2
+Node {
+ name KEEP_THIS_0002
+}
+NodeB {
+ 1
+ name KEEP_NAME_ONLY_0001
+ 3
+ 4
+ 5
+}
+push arg1
+IgnoreA {
+ name KEEP_NAME_ONLY_0002
+}
+IgnoreB {
+ data
+ name KEEP_NAME_ONLY_0003
+ 3
+}

@@ -1,0 +1,17 @@
+Node {
+ 1
+ name KEEP_THIS_0001
+ 3
+}
+Node {
+ name KEEP_THIS_0002
+}
+NodeB {
+ name KEEP_NAME_ONLY_0001
+}
+IgnoreA {
+ name KEEP_NAME_ONLY_0002
+}
+IgnoreB {
+ name KEEP_NAME_ONLY_0003
+}

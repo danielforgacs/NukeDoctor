@@ -1,0 +1,41 @@
+{
+    "no_arg": {
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": null
+    },
+    "no_Dot_w_empty": {
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": "e",
+        "ignoretypes": "Dot"
+    },
+    "no_dot": {
+        "nocmd": null,
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": "Dot"
+    },
+    "no_cmd": {
+        "nocmd": "c",
+        "maxbodylines": null,
+        "emptynodes": null,
+        "ignoretypes": null
+    },
+    "max_lines": {
+        "nocmd": null,
+        "maxbodylines": "4",
+        "emptynodes": null,
+        "ignoretypes": null
+    },
+    "multi": {
+        "nocmd": "c",
+        "maxbodylines": "3",
+        "emptynodes": "e",
+        "ignoretypes": "IgnoreA IgnoreB"
+    },
+    "empty_groups": {
+        "empty_groups": "g"
+    }
+}

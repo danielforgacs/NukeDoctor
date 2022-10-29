@@ -1,0 +1,18 @@
+NoOp {
+ name NoOp1
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
+NoOp {
+ name NoOp2
+ tile_color 0xff00ffff
+ label "Do some comp here."
+ note_font "Verdana Bold"
+ note_font_size 30
+ xpos 0
+ ypos 100
+}
