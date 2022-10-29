@@ -1,8 +1,19 @@
 [package]
-name = "nukerewrite"
-version = "0.1.0"
+name = "nukedoctor"
+version = "2022.10.29"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+clap = "4.0.18"
+env_logger = "0.9.1"
+log = "0.4.17"
+serde = { version = "1.0.147", features = ["derive"] }
+serde_json = "1.0.87"
+
+[dev-dependencies]
+assert_cmd = "2.0.5"
+criterion = "0.4.0"
+
+[[bench]]
+name = "nukedoctorlib_bench"
+harness = false

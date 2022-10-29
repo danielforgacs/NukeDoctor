@@ -1,0 +1,13 @@
+PreGroup {
+    name KEEP
+}
+Group {
+ name KEEP
+}
+ InsideGroup {
+  name DROP_THIS
+ }
+end_group
+PostGroup {
+    name KEEP
+}
