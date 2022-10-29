@@ -29,24 +29,24 @@ impl ConfigBuilder {
             }
         }
 
-    pub fn ignore_commands(&mut self) -> Self {
+    pub fn ignore_commands(&mut self) -> &mut Self {
         self.ignore_commands = true;
-        self.clone()
+        self
     }
 
-    pub fn max_lines(&mut self, lines: usize) -> Self {
+    pub fn max_lines(&mut self, lines: usize) -> &mut Self {
         self.max_body_lines = Some(lines);
-        self.clone()
+        self
     }
 
-    pub fn write_ignored(&mut self) -> Self {
+    pub fn write_ignored(&mut self) -> &mut Self {
         self.write_empty_ignored_nodes = true;
-        self.clone()
+        self
     }
 
-    pub fn ignore_types(&mut self, node_types: Vec<String>) -> Self {
+    pub fn ignore_types(&mut self, node_types: Vec<String>) -> &mut Self {
         self.ignore_node_types = node_types;
-        self.clone()
+        self
     }
 
     pub fn finish(&self) -> Config {
