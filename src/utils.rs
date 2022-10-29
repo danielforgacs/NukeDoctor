@@ -37,40 +37,28 @@ pub fn clean_up_scene(scene: String, config: Config) -> Result<String, String> {
         .map_err(|error| error.to_string())?;
     Ok(scene)
 }
-
+/*
 pub fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !*config.get_write_empty_ignored() {
         nodes = nodes
         .into_iter()
         .filter(|node| {
             if !config.get_ignore_node_types().is_empty() {
-                if config.get_ignore_node_types().contains(&node.get_nodetype()) {
-                    false
-                } else {
-                    true
-                }
+                !config.get_ignore_node_types().contains(&node.get_nodetype())
             } else {
                 true
             }
         })
         .filter(|node| {
             if let Some(max_lines) = config.get_max_body_lines() {
-                if node.get_body_lines() <= max_lines {
-                    true
-                } else {
-                    false
-                }
+                node.get_body_lines() <= max_lines
             } else {
                 true
             }
         })
         .filter(|node| {
             if *config.get_ignore_commands() {
-                if ["set", "push"].contains(&node.get_nodetype().as_str()) {
-                    false
-                } else {
-                    true
-                }
+                !["set", "push"].contains(&node.get_nodetype().as_str())
             } else {
                 true
             }
@@ -92,6 +80,7 @@ pub fn filter_nodes_2(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     };
     nodes
 }
+*/
 
 pub fn filter_nodes(mut nodes: Vec<Node>, config: &Config) -> Vec<Node> {
     if !config.get_ignore_node_types().is_empty() {
