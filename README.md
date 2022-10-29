@@ -32,7 +32,11 @@ Options:
   -V, --version            Print version information
 ```
 
-## building
+### Logging
+
+Set the `RUST_LOG` env var to `info` or `debug`.
+
+## Building the binary
 
 #### [**Download**](https://rustup.rs/) [Rust](https://www.rust-lang.org/)
 
