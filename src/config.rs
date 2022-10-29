@@ -7,6 +7,7 @@ pub struct Config {
     max_body_lines: Option<usize>,
     write_empty_ignored_nodes: bool,
     ignore_node_types: Vec<String>,
+    empty_groups: bool,
 }
 
 #[derive(Clone)]
@@ -16,6 +17,7 @@ pub struct ConfigBuilder {
     max_body_lines: Option<usize>,
     write_empty_ignored_nodes: bool,
     ignore_node_types: Vec<String>,
+    empty_groups: bool,
 }
 
 impl ConfigBuilder {
@@ -26,6 +28,7 @@ impl ConfigBuilder {
                 max_body_lines: Option::None,
                 write_empty_ignored_nodes: false,
                 ignore_node_types: Vec::new(),
+                empty_groups: false,
             }
         }
 
@@ -49,6 +52,11 @@ impl ConfigBuilder {
         self
     }
 
+    pub fn write_empty_groups(&mut self) -> &mut Self {
+        self.empty_groups = true;
+        self
+    }
+
     pub fn finish(&self) -> Config {
         Config {
             scene_file: self.scene_file.clone(),
@@ -56,18 +64,27 @@ impl ConfigBuilder {
             max_body_lines: self.max_body_lines,
             write_empty_ignored_nodes: self.write_empty_ignored_nodes,
             ignore_node_types: self.ignore_node_types.clone(),
+            empty_groups: self.empty_groups,
         }
     }
 }
 
 impl Config {
-    pub fn new(path: String) -> Self {
+    pub fn new(
+        scene_file: String,
+        ignore_commands: bool,
+        max_body_lines: Option<usize>,
+        write_empty_ignored_nodes: bool,
+        ignore_node_types: Vec<String>,
+        empty_groups: bool,
+    ) -> Self {
         Self {
-            scene_file: path,
-            ignore_commands: false,
-            max_body_lines: Option::None,
-            write_empty_ignored_nodes: false,
-            ignore_node_types: Vec::new(),
+            scene_file,
+            ignore_commands,
+            max_body_lines,
+            write_empty_ignored_nodes,
+            ignore_node_types,
+            empty_groups,
         }
     }
 
@@ -89,6 +106,10 @@ impl Config {
 
     pub fn get_write_empty_ignored(&self) -> &bool {
         &self.write_empty_ignored_nodes
+    }
+
+    pub fn get_empty_groups(&self) -> &bool {
+        &self.empty_groups
     }
 }
 
@@ -164,6 +185,7 @@ mod tests {
             max_body_lines: Option::None,
             write_empty_ignored_nodes: false,
             ignore_node_types: Vec::new(),
+            empty_groups: false,
         };
         assert_eq!(config, expected);
     }
@@ -179,6 +201,7 @@ mod tests {
             max_body_lines: Option::None,
             write_empty_ignored_nodes: false,
             ignore_node_types: Vec::new(),
+            empty_groups: false,
         };
         assert_eq!(config, expected);
     }
@@ -189,6 +212,7 @@ mod tests {
         .ignore_commands()
         .max_lines(127)
         .write_ignored()
+        .write_empty_groups()
         .finish();
         let expected = Config {
             scene_file: "some_path".to_string(),
@@ -196,6 +220,7 @@ mod tests {
             max_body_lines: Some(127),
             write_empty_ignored_nodes: true,
             ignore_node_types: Vec::new(),
+            empty_groups: true,
         };
         assert_eq!(config, expected);
     }
