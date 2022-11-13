@@ -3,8 +3,14 @@ enum Token {
     Eof,
 }
 
-fn get_tokens(source: String) -> Vec<Token> {
-    vec![Token::Eof]
+fn get_tokens(raw_scene: String) -> Vec<Token> {
+    let mut tokens = vec![Token::Eof];
+    let source: Vec<char> = raw_scene.chars().collect();
+    let mut index = 0;
+    while index < source.len() {
+
+    };
+    tokens
 }
 
 #[cfg(test)]
